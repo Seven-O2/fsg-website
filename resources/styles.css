@@ -1,0 +1,540 @@
+/**************************** General settings ****************************/
+html {
+    font-size:          24px;
+    scroll-behavior:    smooth;
+    --fsg-color:       rgb(252, 0, 3);
+    --fsg-color-weak:  rgba(252, 0, 3, 0.85);
+    --default-spacing:   5vw;
+    background-color:  black;
+}
+
+@media screen and (max-width: 1000px) {
+    html {
+        font-size: 36px;
+    }
+}
+
+h1 {
+    font-family:   Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: var(--fsg-color);
+    font-size: 4rem;
+    margin-top: 0;
+}
+
+h2 {
+    font-family:   Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+h2.action {
+    font-family:   Jenkine;
+    text-align:    center;
+    font-size:     4.5rem;
+    margin-top:    0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight:   bolder;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+p {
+    text-align: justify;
+}
+
+footer {
+    height: 10vh;
+    padding:          var(--default-spacing);
+    background-color: var(--fsg-color);
+    display:          flex;
+}
+
+footer > a {
+    text-decoration: none;
+    color:         white;
+    margin-top:      auto;
+    margin-bottom:   auto;
+    margin-right:    2rem;
+    transition: all 0.2s;
+}
+
+footer > a:hover {
+    color:         lightgray;
+}
+
+/* Section */
+section {
+    padding-top:      var(--default-spacing);
+    position:         relative;
+    background-color: white;
+}
+
+section::after /* Fine line after section */ {
+    content:       "";
+    display:       block;
+    margin-top:    1rem;
+    margin-left:   1rem;
+    margin-right:  1rem;
+    border:  solid 1px lightgray;
+}
+
+section > .section-title {
+    position:         absolute;
+    font-size:        16vw;
+    transform-origin: 0% 0%;
+    margin-left:      var(--default-spacing);
+    margin-right:     var(--default-spacing);
+}
+
+section > .section-content > * {
+    margin-top:    0;
+    margin-bottom: 2rem;
+    margin-left:   var(--default-spacing);
+    margin-right:  var(--default-spacing);
+}
+
+/* Sideways scrollable */
+/*  container with width of 20rem, adjusts default padding */
+.sideway-scrollable-container {
+    scrollbar-width: none;
+    position:        relative;
+    display:         flex;
+    overflow:        auto;
+    scrollbar-width: none;
+    padding-top:     1rem;
+    padding-bottom:  2rem;
+    padding-left:    var(--default-spacing);
+    padding-right:   var(--default-spacing);
+}
+
+.sideway-scrollable-container::-webkit-scrollbar {
+    display: none;
+}
+
+.sideway-scrollable-container > div:not(.spacer, .hint) {
+    min-width:       20rem;
+    max-width:       20rem;
+    padding:         1rem;
+    margin-right:    2rem;
+    box-shadow:      0px 2px 10px rgba(0, 0, 0, 0.4);
+    border-radius:   1rem;
+    backdrop-filter: blur(17px);
+    z-index:         2;
+    overflow:        hidden;
+}
+
+.sideway-scrollable-container > div > img /* Leading image */ {
+    height:       7rem;
+    display:      block;
+    object-fit:   contain;
+    margin-left:  auto;
+    margin-right: auto;
+}
+
+.sideway-scrollable-container > div:has(img.full) {
+    padding: 0;
+}
+
+.sideway-scrollable-container > div:has(img.full) > p {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+.sideway-scrollable-container > div > img.full {
+    width:        100%;
+    height:       auto;
+    display:      block;
+    object-fit:   contain;
+}
+
+.sideway-scrollable-container p {
+    margin: 0;
+}
+
+/* Fix to use full width of screen */
+section > .section-content > .sideway-scrollable-container {
+    margin-left:   0;
+    margin-right:  0;
+    padding-left:  var(--default-spacing);
+    padding-right: var(--default-spacing);
+}
+
+/* Hint to scroll to right */
+.sideway-scrollable-container > .hint {
+    bottom:    0;
+    right:     1rem;
+    position:  absolute;
+    color:     lightgray;
+    animation: bounceHorizontal infinite 2s;
+}
+
+/* Spacer with a title */
+.sideway-scrollable-container > .spacer {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sideway-scrollable-container > .spacer > p {
+    writing-mode: vertical-rl;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: lightgray;
+}
+
+.sideway-scrollable-container > .spacer::before, 
+.sideway-scrollable-container > .spacer::after {
+    content: "";
+    display: block;
+    height: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    border: solid 1px lightgray;
+}
+
+/* Filler */
+.horizontal-spacer {
+    width: 100%;
+}
+
+.vertical-spacer {
+    height: 100%;
+}
+
+/* Convets something into a button like */
+.button-like {
+    padding:          1rem;
+    background-color: var(--fsg-color);
+    color:            white;
+    border-radius:    0.5rem;
+    box-shadow:       0px 2px 10px rgba(0, 0, 0, 0.4);
+    transition:       all 0.1s;
+    text-decoration:  none;
+}
+
+.button-like:hover {
+    background-color: var(--fsg-color-weak);
+}
+
+.button-like:active {
+    box-shadow:      0px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Vertically aligned text with icon before */
+.icon-with-text {
+    display:       flex;
+    margin-top:    auto;
+    margin-bottom: auto;
+}
+
+.icon-with-text > img {
+    height:       1rem;
+    margin-right: 1rem;
+}
+
+.icon-with-text > p {
+    margin: 0;
+}
+
+/* Colors */
+
+.green { background-color: #008800CC; }
+.green p, .green h2 { color: white; } 
+
+.blue { background-color: #00BFFFCC; }
+.blue p, .blue h2 { color: black; }
+
+.white { background-color: #FFFFFFCC; }
+.white p, .white h2 { color: black; }
+
+.yellow { background-color: #FFFF00CC; }
+.yellow p, .yellow h2 { color: black; }
+
+.black { background-color: #000000CC; }
+.black p, .black h2 { color: white; }
+
+.red { background-color: #bd1919CC; }
+.red p, .red h2 { color: white; }
+
+.info-page {
+    padding: var(--default-spacing);
+    background-color: white;
+}
+
+/**************************** Size navigation (menu/titlebar) ****************************/
+nav {
+    position:       absolute;
+    display:        flex;
+    align-items:    center;
+    width:          100vw;
+    height:         5rem;
+    top:            0;
+    left:           0;
+    z-index:        10;
+    padding-top:    1rem;
+    padding-bottom: 1rem;
+}
+
+nav > :first-child { margin-left:  var(--default-spacing); }
+nav > :last-child  { margin-right: var(--default-spacing); }
+
+.logo {
+    flex-grow: 1;
+    max-width: 30vw;
+}
+
+#menu-links {
+    display:     flex;
+    margin-left: auto;
+    flex-grow: 0;
+}
+
+#menu-links > a {
+    text-align:      center;
+    padding-left:    1.5rem;
+    padding-right:   1.5rem;
+    margin-top:      auto;
+    margin-bottom:   auto;
+    color:           white;
+    font-weight:     600;
+    text-wrap:       nowrap;
+    text-decoration: none;
+    transition:      0.3s
+}
+
+#menu-links > a:hover {
+    filter: invert(1);
+}
+
+#menu-button {
+    display: none;
+}
+
+#menu-button:hover { 
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    .logo {
+        max-width: 60vw;
+    }
+    
+    #menu-links {
+        flex-direction:   column;
+        position:         absolute;
+        background-color: var(--fsg-color-weak);
+        height:           0;
+        top:              0;
+        right:            0;
+        overflow:         hidden;
+        transition: all ease-in-out 0.5s;
+    }
+
+    #menu-links > a:first-child {
+        margin-top: 6rem;
+    }
+
+    #menu-links > a {
+        margin-top:    1rem;
+        margin-bottom: 1rem;
+        text-align: right;
+    }
+
+    #menu-button {
+        display: block;
+        margin-left: auto;
+        transition: all ease-in-out 0.5s;
+        height:  2rem;
+        width:   2rem;
+        z-index: 11;
+    }
+
+    #menu-button.enabled {
+        filter: grayscale(1) contrast(9) invert(1);
+    }
+
+    #menu-links.enabled  {
+        height: 100vh;
+    }
+}
+
+
+/**************************** Title ****************************/
+#title-container {
+    height:   100vh;
+    width:    100vw;
+    overflow: hidden;
+    position: relative;
+}
+
+#title-container > img {
+    position: absolute;
+    width:      102vw;
+    height:     102vh;
+    top:        0;
+    left:       0;
+    object-fit: cover;
+}
+
+#title-text-container {
+    position:        absolute;
+    height:          97vh;
+    padding-left:    var(--default-spacing);
+    z-index:         1;
+    display:         flex;
+    flex-direction:  column;
+    justify-content: flex-end;
+}
+
+/* Mobile => text must be further up */
+@media screen and (max-width: 1000px) { 
+    #title-text-container {
+        height: 87vh;
+    }
+}
+
+#title-text-container > h1 {
+    font-family:   Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin:        0;
+    line-height:   1;
+    animation:     0.5s ease-out 0s 1 slideInFromBottom;
+    font-size:     8vw;
+    color:         var(--fsg-color-weak);
+}
+
+#title-image {
+    z-index: 0;
+}
+
+#title-image-overlay {
+    z-index: 2;
+}
+
+#title-text-container > h1 > span{ 
+    color: rgba(255, 255, 255, 0.85)
+}
+
+/**************************** About ****************************/
+.bylaws-container {
+    display: flex;
+    justify-content: center;
+}
+/**************************** Dates ****************************/
+.date {
+    display:         flex;
+    box-shadow:      0px 2px 10px rgba(0, 0, 0, 0.4);
+    border-radius:   1rem;
+    backdrop-filter: blur(17px);
+    overflow:        hidden;
+}
+
+.date p {
+    margin-top: auto;
+    margin-bottom: auto;
+    text-wrap: nowrap;
+
+}
+
+.date > div {
+    min-width: 15rem;
+    padding:   1rem;
+}
+
+.date > div > * {
+    display: flex;
+    margin: 0.5rem;
+}
+
+.date > div > div > img {
+    height: 1rem;
+    margin-right: 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.date > .map {
+    border: none;
+    width: 100%;
+}
+
+.date > .cancelled::before {
+    content: "Abgesagt";
+    position: absolute;
+    color: red;
+    rotate: -10deg;
+    font-size: 5rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+/**************************** Regulations ****************************/
+.regulations-container {
+    display: flex;
+    justify-content:space-between;
+    padding-left: 20vw;
+    padding-right: 20vw;
+}
+
+@media screen and (max-width: 1000px) { 
+    .regulations-container {
+        padding-left:  0;
+        padding-right: 0;
+    }
+}
+
+/**************************** Rankings ****************************/
+
+.rankings-container > * {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+/**************************** Animations ****************************/
+@keyframes slideInFromBottom {
+    0% {
+      transform: translateY(100vh);
+    }
+    50% {
+        transform: translateY(10vh);
+    }
+    100% {
+      transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromTop {
+    0% {
+      transform: translateY(-100vh);
+    }
+    50% {
+        transform: translateY(10vh);
+    }
+    100% {
+      transform: translateY(0);
+    }
+}
+
+@keyframes bounceHorizontal {
+    0% {
+        transform: translateX(0);
+    }
+    10% {
+        transform: translateX(7.5px);
+    }
+    20% {
+        transform: translateX(-2.5px);
+    }
+    30% {
+        transform: translateX(5px);
+    }
+    40% {
+        transform: translateX(-2.5px);
+    }
+    50% {
+        transform: translateX(2.5px);
+    }
+    60% {
+        transform: translateX(0);
+    }
+}

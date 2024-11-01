@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 2000 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <rect x="380" y="130" width="1620" height="160" style="fill:rgb(252,0,3);"/>
+    <path d="M140,285L350,285L292.8,130L140,130L140,194L109,194L119.5,225L140,225L140,285Z" style="fill:rgb(252,0,3);"/>
+    <g>
+        <path d="M0,195L0,225L120,225L109,194L0,195Z" style="fill:white;"/>
+        <path d="M0,285L140,285L119.5,225L0,225L0,285Z" style="fill:rgb(252,0,3);"/>
+        <path d="M0,195L109,194L87.451,130L0,130L0,195Z" style="fill:rgb(252,0,3);"/>
+    </g>
+    <g transform="matrix(1,0,0,1,1.8186,-2)">
+        <path d="M175.584,225L164.584,194L210.181,194L194.181,150L229.181,150L245.181,194L290.778,194.257L301.416,225.324L255.681,225L271.181,269L237.181,269L221.181,225L175.584,225Z" style="fill:white;"/>
+    </g>
+    <path d="M388,100L388,37L475,37L475,50L406,50L406,62L475,62L475,75L406,75L406,100L388,100Z"/>
+    <path d="M487,100L487,87L556,87L556,71L488,71L488,37L575,37L575,50L506,50L506,60L575,60L575,100L487,100Z"/>
+    <path d="M587,100L587,37L675,37L675,50L606,50L606,87L656,87L656,74L631,74L631,62L675,62.5L675,100L587,100Z"/>
+    <g transform="matrix(1,0,0,1,-1,12)">
+        <g transform="matrix(61.6667,0,0,61.6667,1768.35,220)">
+        </g>
+        <text x="431.5px" y="220px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:61.667px;fill:white;">Föderation Schweizerischer Geländewagenclubs</text>
+    </g>
+</svg>
