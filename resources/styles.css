@@ -80,7 +80,7 @@ section::after /* Fine line after section */ {
 }
 
 section > .section-title {
-    position:         absolute;
+    margin-bottom:    1rem;
     font-size:        16vw;
     transform-origin: 0% 0%;
     margin-left:      var(--default-spacing);

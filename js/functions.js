@@ -39,17 +39,8 @@ const SectionScrollActions = (elements) => {
     document.addEventListener("scroll", _ => {
         Array.from(elements).forEach(element => {
             const title = element.getElementsByClassName("section-title")[0];
-            const content = element.getElementsByClassName("section-content")[0];
-
             const offsetFromCenter = window.innerHeight / 2 - title.getBoundingClientRect().top - delay; // represents the offset of the sections start to the screens center
-
-            // Rotate title to left side plus parallax 
-            title.style.rotate    = Math.min( 90, Math.max(0,                         offsetFromCenter / 1.5)) + "deg";
             title.style.fontSize  = Math.min( 16, Math.max(defaultSpacing * 0.8, 16 - offsetFromCenter / 11)) + "vw";
-            title.style.marginTop = Math.max(0, offsetFromCenter / 4) + "px";
-            
-            // Shift content to title position
-            content.style.marginTop = Math.max(0, Math.min(21, 21 - offsetFromCenter / 6.25)) + "vw";
         });
     }, false);
 }
