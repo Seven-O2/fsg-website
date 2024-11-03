@@ -5,7 +5,7 @@ html {
     --fsg-color:       rgb(252, 0, 3);
     --fsg-color-weak:  rgba(252, 0, 3, 0.85);
     --default-spacing:   5vw;
-    background-color:  black;
+    background-color: black;
 }
 
 @media screen and (max-width: 1000px) {
@@ -23,6 +23,7 @@ h1 {
 
 h2 {
     font-family:   Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-top: 0;
 }
 
 h2.action {
@@ -125,11 +126,12 @@ section > .section-content > * {
 }
 
 .sideway-scrollable-container > div > img /* Leading image */ {
-    height:       7rem;
-    display:      block;
-    object-fit:   contain;
-    margin-left:  auto;
-    margin-right: auto;
+    height:        7rem;
+    margin-bottom: 1rem;
+    display:       block;
+    object-fit:    contain;
+    margin-left:   auto;
+    margin-right:  auto;
 }
 
 .sideway-scrollable-container > div:has(img.full) {
@@ -203,6 +205,11 @@ section > .section-content > .sideway-scrollable-container {
     height: 100%;
 }
 
+/* General classes */
+.mono {
+    font-family: monospace;
+}
+
 /* Convets something into a button like */
 .button-like {
     padding:          1rem;
@@ -236,6 +243,61 @@ section > .section-content > .sideway-scrollable-container {
 
 .icon-with-text > p {
     margin: 0;
+}
+
+.icon-with-text > div {
+    margin-bottom: 0.5rem;
+}
+
+.icon-with-text > div > *:not(:first-child) {
+    color: gray;
+    font-size: 0.8rem;
+}
+
+/* Card */
+.card {
+    display:         flex;
+    box-shadow:      0px 2px 10px rgba(0, 0, 0, 0.4);
+    border-radius:   1rem;
+    backdrop-filter: blur(17px);
+    overflow:        hidden;
+}
+
+.card > *:first-child {
+    min-width: 15rem;
+    padding:   1rem;
+}
+
+.card h2 {
+    margin-bottom: 1rem;
+}
+
+.card p {
+    margin: 0;
+}
+
+.card > .map {
+    border: none;
+    width: 100%;
+}
+
+.cancelled::before {
+    content: "Abgesagt";
+    position: absolute;
+    color: red;
+    rotate: -10deg;
+    font-size: 5rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+@media screen and (max-width: 1000px) {
+    .card {
+        flex-direction: column;
+    }
+
+    .card > .map {
+        height: 50vh;
+    }
 }
 
 /* Colors */
@@ -297,15 +359,15 @@ nav > :last-child  { margin-right: var(--default-spacing); }
     padding-right:   1.5rem;
     margin-top:      auto;
     margin-bottom:   auto;
-    color:           white;
+    color:         white;
     font-weight:     600;
     text-wrap:       nowrap;
     text-decoration: none;
-    transition:      0.3s
+    transition:      0.3s;
 }
 
 #menu-links > a:hover {
-    filter: invert(1);
+    color: black;
 }
 
 #menu-button {
@@ -421,52 +483,8 @@ nav > :last-child  { margin-right: var(--default-spacing); }
     display: flex;
     justify-content: center;
 }
+
 /**************************** Dates ****************************/
-.date {
-    display:         flex;
-    box-shadow:      0px 2px 10px rgba(0, 0, 0, 0.4);
-    border-radius:   1rem;
-    backdrop-filter: blur(17px);
-    overflow:        hidden;
-}
-
-.date p {
-    margin-top: auto;
-    margin-bottom: auto;
-    text-wrap: nowrap;
-
-}
-
-.date > div {
-    min-width: 15rem;
-    padding:   1rem;
-}
-
-.date > div > * {
-    display: flex;
-    margin: 0.5rem;
-}
-
-.date > div > div > img {
-    height: 1rem;
-    margin-right: 1rem;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.date > .map {
-    border: none;
-    width: 100%;
-}
-
-.date > .cancelled::before {
-    content: "Abgesagt";
-    position: absolute;
-    color: red;
-    rotate: -10deg;
-    font-size: 5rem;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
 
 /**************************** Regulations ****************************/
 .regulations-container {
