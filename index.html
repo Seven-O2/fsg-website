@@ -7,16 +7,6 @@
     <link href="https://fonts.cdnfonts.com/css/impact" rel="stylesheet" type="text/css">
     <link href="https://fonts.cdnfonts.com/css/jenkine" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="./resources/icons/favicon.ico">
-    <script src="./js/functions.js"></script>
-    <script>
-      FollowScrollInverse([document.getElementById("title-text-container")]);
-      SectionScrollActions([...document.getElementsByTagName("section")]);
-  
-      // Title image follow mouse (if applicable)
-      if(window.screen.width > 1000) {
-          FollowMouse([document.getElementById("title-image"), document.getElementById("title-image-overlay")]);
-      }
-    </script>
     <title>Föderation Schweizer Geländewagenclubs - FSG</title>
   </head>
   <body>
@@ -204,8 +194,8 @@
           <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2729.9602599415007!2d9.412765077058165!3d46.824783641637055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDbCsDQ5JzI5LjIiTiA5wrAyNCc1NS4yIkU!5e0!3m2!1sde!2sch!4v1730636586328!5m2!1sde!2sch" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <!-- Seltz -->
-        <div class="card">
-          <div class="cancelled">
+        <div class="card cancelled">
+          <div>
             <h2>25. Mai 2024</h2>
             <div class="icon-with-text">
               <img src="resources/icons/map_pin.svg" alt="Ortschaft">
@@ -312,7 +302,7 @@
         <div class="sideway-scrollable-container">
           <div class="hint">Weitere Klassen →</div>
           <div class="green">
-            <img src="resources/images/funcup.jpg" alt="Bild eines Fun-Cup Fahrzeugs">
+            <img src="resources/images/funcup.jpg" class="full" alt="Bild eines Fun-Cup Fahrzeugs">
             <h2 class="action">Fun-Cup</h2>
             <p>In der Klasse Fun-Cup treten die Fahrer mit auf der Strasse zugelassenen Fahrzeugen gegeneinander an. Alle Änderungen müssen legal sein und eingetragen sein, das Fahrzeug muss eingelöst sein.</p>
           </div>
@@ -363,4 +353,14 @@
       <a href="">Anmelden</a>
     </footer>
   </body>
+  <script src="./js/functions.js"></script>
+    <script>
+      FollowScrollInverse([document.getElementById("title-text-container")]);
+      ReduceSizeOnScroll([...document.getElementsByClassName("section-title")]);
+  
+      // Title image follow mouse (if applicable)
+      if(window.screen.width > 1000) {
+          FollowMouse([document.getElementById("title-image"), document.getElementById("title-image-overlay")]);
+      }
+    </script>
 </html>
