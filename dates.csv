@@ -1,2 +1,7 @@
-date;place;lat;long;organizer;cancelled;
-27. April 2024;Reichenau GR;46.82478° N;09.41534° E;GWC-Schweiz;false;
+date;place;lat;long;organizer;cancelled;logo
+27. April 2024;Reichenau GR;46.82478;09.41534;GWC-Schweiz;false;;
+25. Mai 2024;Seltz, Wissembourg (FR);48.92109;08.10683;4x4 Aargau;true;;
+22. Juni 2024;Rabius, GR;46.72891;08.95539;GWC-Schweiz;false;;
+07. September 2024;Drackenstein, Baden Württemberg (DE);48.55511;09.66647;4x4 Savièse;false;;
+05. Oktober 2024;Reichenau GR;46.82478;09.41534;4x4 Aargau;false;;
+19. Oktober 2024;Seltz, Wissembourg (FR);48.92109;08.10683;4x4 Aargau;false;;

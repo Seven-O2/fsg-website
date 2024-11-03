@@ -265,7 +265,7 @@ section > .section-content > .sideway-scrollable-container {
 }
 
 .card > *:first-child {
-    min-width: 15rem;
+    min-width: 20rem;
     padding:   1rem;
 }
 
@@ -283,19 +283,20 @@ section > .section-content > .sideway-scrollable-container {
 }
 
 .card + .cancelled > * {
-    opacity: 10%;
+    opacity: 30%;
 }
 
 .cancelled::before {
-    position:  absolute;
-    content:   "Abgesagt";
-    display:   block;
-    top:       50%;
-    left:      50%; 
-    transform: translate(-50%, -50%);
-    color:       red;
+    position:    absolute;
+    content:     "Abgesagt";
+    display:     block;
+    top:         50%;
+    left:        50%; 
+    transform:   translate(-50%, -50%);
+    color:     red;
     font-size:   5rem;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    z-index:     1;
 }
 
 @media screen and (max-width: 1000px) {
