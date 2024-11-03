@@ -225,13 +225,7 @@
     <section id="rangliste">
       <h1 class="section-title">Rangliste</h1>
       <div class="section-content">
-        <h2>2024</h2>
-        <div class="rankings-container">
-          <a class="button-like" href="./documents/rankings/2024/2024_jahresrangliste.pdf">Jahresrangliste</a>
-          <a class="button-like" href="./documents/rankings/2024/241019_tagesrangliste_seltz.pdf">Seltz 19. Oktober</a>
-          <a class="button-like" href="./documents/rankings/2024/241005_tagesrangliste_reichenau.pdf">Reichenau 05. Oktober</a>
-          <a class="button-like" href="./documents/rankings/2024/240907_tagesrangliste_drackenstein.pdf">Drackenstein 07. September</a>
-        </div>
+        <!-- Rankings filled by JS and rankings folder -->
       </div>
     </section>
     <footer>
@@ -239,11 +233,8 @@
       <div class="horizontal-spacer"></div>
       <a href="">Anmelden</a>
     </footer>
-    <div style="background-color: white;" id="A">
-
-    </div>
   </body>
-  <script src="./js/functions.js?1"></script>
+  <script src="./functions.js"></script>
     <script>
       FollowScrollInverse([document.getElementById("title-text-container")]);
       ReduceSizeOnScroll([...document.getElementsByClassName("section-title")]);
@@ -252,7 +243,7 @@
       if(window.screen.width > 1000) {
           FollowMouse([document.getElementById("title-image"), document.getElementById("title-image-overlay")]);
       }
-      //CreateRankings("", "/rankings.csv");
+      CreateRankings(document.getElementById("rangliste").getElementsByClassName("section-content")[0], "/documents/rankings/list_rankings.php");
       CreateDates(document.getElementById("termine").getElementsByClassName("section-content")[0], "/dates.csv");
     </script>
 </html>
