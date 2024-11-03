@@ -1,4 +1,5 @@
 # FSG Website
+![FSG Logo](./icons/logo.svg)
 Repostiory containing the source code for my offroad club's website. It is entirely written in plain HTML and CSS (because frameworks are heavy and tedious to maintain if not done daily) and a little javascript for animations.
 
 Since this will be running on a php enabled server, some php is added to traverse the file system (for the rankings, so they are added automatically). Also, the events may be added by a simple .csv file.
