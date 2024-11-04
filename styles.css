@@ -267,6 +267,7 @@ section > .section-content > .sideway-scrollable-container {
 .card > *:first-child {
     min-width: 20rem;
     padding:   1rem;
+    position: relative;
 }
 
 .card h2 {
@@ -276,6 +277,13 @@ section > .section-content > .sideway-scrollable-container {
 .card p {
     margin:     0;
     text-align: left;
+}
+
+.card .event-logo {
+    position: absolute;
+    top:      0;
+    right:    0;
+    height:   100%;
 }
 
 .card > .map {

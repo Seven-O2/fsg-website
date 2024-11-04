@@ -72,6 +72,16 @@ const CreateDates = (parent, file) => {
             /**** Card data container ****/
             const data = document.createElement("div");
             card.appendChild(data);
+
+            // Logo
+            console.log(ev[0] + "    " + ev[6]);
+            if(ev[6] === "true") {
+                const logo = document.createElement("img");
+                logo.classList.add("event-logo");
+                logo.src = "/images/eurotrial.png";
+                logo.alt = "Logo der Veranstaltung";
+                data.appendChild(logo);
+            }
             
             // Title
             const title = document.createElement("h2");
