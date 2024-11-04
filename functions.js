@@ -33,13 +33,13 @@ const FollowScrollInverse = (elements) => {
     }, false);
 }
 
-// When scrolled past middle of the display, the element will be reduced in size
+// When scrolled past middle of the display, the element's font-size will be expanded in size (from 6 to 16)
 const ReduceSizeOnScroll = (elements) => {
-    const delay = 20;
+    const delay = 0; // how many VH after middle the animation shall start
     document.addEventListener("scroll", _ => {
         Array.from(elements).forEach(element => {
             const offsetFromCenter = window.innerHeight / 2 - element.getBoundingClientRect().top - delay; // represents the offset of the sections start to the screens center
-            element.style.fontSize = Math.min(16, Math.max(6, 16 - offsetFromCenter / 20)) + "vw";
+            element.style.fontSize = Math.min(16, Math.max(4, offsetFromCenter / 20)) + "vw";
         });
     }, false);
 }
@@ -133,6 +133,7 @@ const CreateDates = (parent, file) => {
     });
 }
 
+// Creates the rankings given by the selected PHP Script (executed server side)
 const CreateRankings = (parent, phpScript) => {
     const monate = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
 

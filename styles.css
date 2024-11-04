@@ -10,7 +10,7 @@ html {
 
 @media screen and (max-width: 1000px) {
     html {
-        font-size: 36px;
+        font-size: 40px;
     }
 }
 
@@ -26,7 +26,7 @@ h2 {
     margin-top: 0;
 }
 
-h2.action {
+h3 {
     font-family:   Jenkine;
     text-align:    center;
     font-size:     4.5rem;
@@ -274,12 +274,13 @@ section > .section-content > .sideway-scrollable-container {
 }
 
 .card p {
-    margin: 0;
+    margin:     0;
+    text-align: left;
 }
 
 .card > .map {
     border: none;
-    width: 100%;
+    width:  100%;
 }
 
 .card + .cancelled > * {
@@ -304,6 +305,11 @@ section > .section-content > .sideway-scrollable-container {
         flex-direction: column;
     }
 
+    .card > *:first-child {
+        min-width: 0;
+        max-width: 100%;
+    }
+
     .card > .map {
         height: 30vh;
     }
@@ -312,22 +318,22 @@ section > .section-content > .sideway-scrollable-container {
 /* Colors */
 
 .green { background-color: #008800CC; }
-.green p, .green h2 { color: white; } 
+.green p, .green h3 { color: white; } 
 
 .blue { background-color: #00BFFFCC; }
-.blue p, .blue h2 { color: black; }
+.blue p, .blue h3 { color: black; }
 
 .white { background-color: #FFFFFFCC; }
-.white p, .white h2 { color: black; }
+.white p, .white h3 { color: black; }
 
 .yellow { background-color: #FFFF00CC; }
-.yellow p, .yellow h2 { color: black; }
+.yellow p, .yellow h3 { color: black; }
 
 .black { background-color: #000000CC; }
-.black p, .black h2 { color: white; }
+.black p, .black h3 { color: white; }
 
 .red { background-color: #bd1919CC; }
-.red p, .red h2 { color: white; }
+.red p, .red h3 { color: white; }
 
 .info-page {
     padding: var(--default-spacing);
