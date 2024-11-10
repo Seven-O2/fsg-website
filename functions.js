@@ -132,7 +132,6 @@ const CreateDates = (parent, file) => {
 
             /**** Card map container ****/
             const map = document.createElement("iframe");
-            map.loading = "lazy";
             map.referrerPolicy = "no-referrer-when-downgrade";
             map.classList.add("map");
             map.src = "https://maps.google.com/maps?hl=de&q=" + ev[2] + "," + ev[3] + "&z=6&output=embed"
