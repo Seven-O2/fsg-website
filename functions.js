@@ -33,13 +33,13 @@ const FollowScrollInverse = (elements) => {
     }, false);
 }
 
-// When scrolled past middle of the display, the element's font-size will be expanded in size (from 6 to 16)
-const ReduceSizeOnScroll = (elements) => {
-    const delay = 0; // how many VH after middle the animation shall start
+// When top (plus delay) reaches bottom of screen, start reducing margin (thus making a fly in animation)
+const FlyInFromBottom = (elements) => {
+    const delay = 10; // how many VH after middle the animation shall start
     document.addEventListener("scroll", _ => {
         Array.from(elements).forEach(element => {
-            const offsetFromCenter = window.innerHeight / 2 - element.getBoundingClientRect().top - delay; // represents the offset of the sections start to the screens center
-            element.style.fontSize = Math.min(16, Math.max(4, offsetFromCenter / 20)) + "vw";
+            const offsetFromCenter = window.innerHeight - element.getBoundingClientRect().top - delay; // represents the offset of the sections start to the screens center
+            element.style.marginTop = Math.min(16, Math.max(0, 16 - offsetFromCenter / 20)) + "vh"; 
         });
     }, false);
 }
@@ -56,15 +56,17 @@ const CreateDates = (parent, file) => {
         .map(e => e.split(";"))
         .forEach(ev => {
             // [0] => Date
-            // [1] = Place
-            // [2] = Latitude
-            // [3] = Longitude
-            // [4] = Organizer
-            // [5] = Cancelled
-            // [6] = Logo
+            // [1] => Place
+            // [2] => Latitude
+            // [3] => Longitude
+            // [4] => Organizer
+            // [5] => Cancelled
+            // [6] => Logo
 
             const card = document.createElement("div");
+            card.onclick = () => window.open("https://maps.google.com/maps?hl=de&q=" + ev[2] + "," + ev[3], "_blank");
             card.classList.add("card")
+            card.classList.add("clickable")
             if(ev[5] === "true") {
                 card.classList.add("cancelled")
             }
@@ -74,7 +76,6 @@ const CreateDates = (parent, file) => {
             card.appendChild(data);
 
             // Logo
-            console.log(ev[0] + "    " + ev[6]);
             if(ev[6] === "true") {
                 const logo = document.createElement("img");
                 logo.classList.add("event-logo");
@@ -131,15 +132,14 @@ const CreateDates = (parent, file) => {
 
             /**** Card map container ****/
             const map = document.createElement("iframe");
-            map.classList.add("map");
-            map.allowFullscreen = "";
             map.loading = "lazy";
-            map.referrerpolicy = "no-referrer-when-downgrade";
-            map.src = "https://maps.google.com/maps?hl=de&q=" + ev[2] + "," + ev[3] + "&output=embed"
+            map.referrerPolicy = "no-referrer-when-downgrade";
+            map.classList.add("map");
+            map.src = "https://maps.google.com/maps?hl=de&q=" + ev[2] + "," + ev[3] + "&z=6&output=embed"
             card.appendChild(map);
-            
             parent.appendChild(card);
         });
+        FlyInFromBottom([...document.getElementsByClassName("card")]);
     });
 }
 

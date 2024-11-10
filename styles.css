@@ -57,7 +57,7 @@ footer > a {
     margin-top:      auto;
     margin-bottom:   auto;
     margin-right:    2rem;
-    transition: all 0.2s;
+    transition:      all 0.2s;
 }
 
 footer > a:hover {
@@ -123,6 +123,7 @@ section > .section-content > * {
     backdrop-filter: blur(17px);
     z-index:         2;
     overflow:        hidden;
+    transition:      0.1s;
 }
 
 .sideway-scrollable-container > div > img /* Leading image */ {
@@ -261,13 +262,18 @@ section > .section-content > .sideway-scrollable-container {
     box-shadow:      0px 2px 10px rgba(0, 0, 0, 0.4);
     border-radius:   1rem;
     backdrop-filter: blur(17px);
+    min-height:      10rem;
     overflow:        hidden;
+    transition:      0.1s;
 }
 
 .card > *:first-child {
-    min-width: 20rem;
-    padding:   1rem;
-    position: relative;
+    position:        absolute;
+    box-sizing:      border-box; /* Makes height calculation 100% including padding */
+    height:          100%;
+    padding:         1rem;
+    width:           20rem;
+    backdrop-filter: blur(13px);
 }
 
 .card h2 {
@@ -281,18 +287,22 @@ section > .section-content > .sideway-scrollable-container {
 
 .card .event-logo {
     position: absolute;
-    top:      0;
-    right:    0;
-    height:   100%;
+    right: 0;
+    height: 80%;
 }
 
 .card > .map {
-    border: none;
-    width:  100%;
+    border:  none;
+    width:   100%;
 }
 
-.card + .cancelled > * {
-    opacity: 30%;
+.cancelled::after {
+    position:         absolute;
+    content:          "";
+    width:            100%;
+    height:           100%;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter:  blur(3px);
 }
 
 .cancelled::before {
@@ -314,12 +324,12 @@ section > .section-content > .sideway-scrollable-container {
     }
 
     .card > *:first-child {
-        min-width: 0;
-        max-width: 100%;
+        height: auto;
+        min-width: 100%;
     }
 
     .card > .map {
-        height: 30vh;
+        height: 50vh;
     }
 }
 
@@ -346,6 +356,11 @@ section > .section-content > .sideway-scrollable-container {
 .info-page {
     padding: var(--default-spacing);
     background-color: white;
+}
+
+.clickable:hover:not(#booster) {
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.6);
+    cursor:     pointer;
 }
 
 /**************************** Size navigation (menu/titlebar) ****************************/
@@ -414,7 +429,7 @@ nav > :last-child  { margin-right: var(--default-spacing); }
         top:              0;
         right:            0;
         overflow:         hidden;
-        transition: all ease-in-out 0.5s;
+        transition:       all ease-in-out 0.5s;
     }
 
     #menu-links > a:first-child {
@@ -444,7 +459,6 @@ nav > :last-child  { margin-right: var(--default-spacing); }
         height: 100vh;
     }
 }
-
 
 /**************************** Title ****************************/
 #title-container {

@@ -45,7 +45,7 @@
           <div class="spacer">
             <p>Clubs</p>
           </div>
-          <div>
+          <div class="clickable" onclick="window.open('https://4x4club-aargau.ch','_blank')">
             <img src="./images/clubs/4x4aargau.png" alt="Logo des 4x4 Aargaus">
             <h2>4x4 Club Aargau</h2>
             <div class="icon-with-text">
@@ -69,7 +69,7 @@
               <p>+41 32 637 16 25</p> 
             </div>
           </div>
-          <div>
+          <div class="clickable" onclick="window.open('https://www.gwc-schweiz.ch/','_blank')">
             <img src="./images/clubs/gwc_schweiz.png" alt="Logo des GWC Schweiz">
             <h2>GWC Schweiz</h2>
             <div class="icon-with-text">
@@ -81,7 +81,7 @@
               <p>president@gwc-schweiz.ch</p> 
             </div>
           </div>
-          <div>
+          <div class="clickable" onclick="window.open('https://www.facebook.com/4x4lamorge/','_blank')">
             <img src="./images/clubs/la_morge_4x4.png" alt="Logo des 4x4 Clubs Savièse">
             <h2>4x4 Club Savièse</h2>
             <div class="icon-with-text">
@@ -237,13 +237,14 @@
   <script src="./functions.js"></script>
     <script>
       FollowScrollInverse([document.getElementById("title-text-container")]);
-      ReduceSizeOnScroll([...document.getElementsByClassName("section-title")]);
+      FlyInFromBottom([...document.getElementsByClassName("section-title")]);
+      FlyInFromBottom([...document.getElementsByClassName("sideway-scrollable-container")]);
   
       // Title image follow mouse (if applicable)
       if(window.screen.width > 1000) {
           FollowMouse([document.getElementById("title-image"), document.getElementById("title-image-overlay")]);
       }
       CreateRankings(document.getElementById("rangliste").getElementsByClassName("section-content")[0], "/documents/rankings/list_rankings.php");
-      CreateDates(document.getElementById("termine").getElementsByClassName("section-content")[0], "/dates.csv");
+      CreateDates(document.getElementById("termine").getElementsByClassName("section-content")[0], "/dates.csv")
     </script>
 </html>
