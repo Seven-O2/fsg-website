@@ -134,6 +134,7 @@ const CreateDates = (parent, file) => {
             const map = document.createElement("iframe");
             map.referrerPolicy = "no-referrer-when-downgrade";
             map.classList.add("map");
+            //map.src = "http://www.openstreetmap.org/?lat=" + ev[2] + "&lon=" + ev[3]+ "&zoom=6&layers=M";
             map.src = "https://maps.google.com/maps?hl=de&q=" + ev[2] + "," + ev[3] + "&z=6&output=embed"
             card.appendChild(map);
             parent.appendChild(card);
