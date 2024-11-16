@@ -60,6 +60,15 @@ const getIconWithText = (iconSrc, iconAlt, text) => {
 // Creates the dates on the webpage according to the passed file
 const CreateDates = (parent, file) => {
     fetch(file)
+    .then(response => {
+        if(response.status !== 200) {
+            const title = document.createElement("h2");
+            title.innerHTML = "Daten konnten nicht geladen werden.";
+            parent.appendChild(title);
+            throw new Error("Couldn't load data");
+        }
+        return response;
+    })
     .then(response => response.text())
     .then((data) => {
         data
@@ -144,7 +153,7 @@ const CreateDates = (parent, file) => {
             map.setView(map.containerPointToLatLng([horizontalCenter, verticalCenter]));
         });
         FlyInFromBottom([...document.getElementsByClassName("card")]);
-    });
+    })
 }
 
 // Creates the rankings given by the selected PHP Script (executed server side)
