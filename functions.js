@@ -35,11 +35,15 @@ const FollowScrollInverse = (elements) => {
 
 // When top (plus delay) reaches bottom of screen, start reducing margin (thus making a fly in animation)
 const FlyInFromBottom = (elements) => {
-    const delay = 10; // how many VH after middle the animation shall start
     document.addEventListener("scroll", _ => {
         Array.from(elements).forEach(element => {
-            const offsetFromCenter = window.innerHeight - element.getBoundingClientRect().top - delay; // represents the offset of the sections start to the screens center
-            element.style.marginTop = Math.min(16, Math.max(0, 16 - offsetFromCenter / 20)) + "vh"; 
+            const offsetFromBottom = window.innerHeight - element.getBoundingClientRect().top + parseInt(getComputedStyle(element).marginTop); // represents the offset of the sections start to the screens center
+            if(offsetFromBottom > 0) {
+                element.style.marginTop = Math.min(16, Math.max(0, 16 - offsetFromBottom / 20)) + "vh"; 
+            } else {
+                element.style.marginTop = 0; // if the element is out of bounds, set it's margin to 0 (so anchor link jumping works)
+            }
+            
         });
     }, false);
 }
@@ -134,8 +138,14 @@ const CreateDates = (parent, file) => {
             mapDiv.classList.add("map");
             card.appendChild(mapDiv);
 
-            const map = L.map(mapDiv, {attributionControl: false} ).setView([ev[2], ev[3]], 7);
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            const map = L.map(mapDiv).setView([ev[2], ev[3]], 7);
+            L.tileLayer('https://tiles1-bc7b4da77e971c12cb0e069bffcf2771.skobblermaps.com/TileService/tiles/2.0/01021113210/7/{z}/{x}/{y}.png@2x?traffic=false', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            // Backup tile layers (uncomment to use)
+            // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            // L.tileLayer('https://tile-4.kartenforum.slub-dresden.de/styles/maptiler-basic-v2/{z}/{x}/{y}@2x.png').addTo(map)
+
             // Move marker to center between blurred part and right bounds (bottom bound on mobile)
             let verticalCenter   = mapDiv.getBoundingClientRect().height / 2;
             let horizontalCenter = mapDiv.getBoundingClientRect().width / 2;
@@ -143,12 +153,14 @@ const CreateDates = (parent, file) => {
                 // MOBILE
                 verticalCenter   = (mapDiv.getBoundingClientRect().height - data.getBoundingClientRect().height) / 2;
                 L.marker([ev[2], ev[3]], {icon: L.icon({iconUrl: './icons/marker_pin.svg', iconSize: [80, 80], iconAnchor: [40, 80]})}).addTo(map);
+                map.setView(map.containerPointToLatLng([horizontalCenter, verticalCenter]));
             } else {
                 // DESKTOP
                 horizontalCenter = (mapDiv.getBoundingClientRect().width - data.getBoundingClientRect().width) / 2;
                 L.marker([ev[2], ev[3]], {icon: L.icon({iconUrl: './icons/marker_pin.svg', iconSize: [40, 40], iconAnchor: [20, 40]})}).addTo(map);
+                map.setView(map.containerPointToLatLng([horizontalCenter, verticalCenter]));
             }
-            map.setView(map.containerPointToLatLng([horizontalCenter, verticalCenter]));
+            
         });
         FlyInFromBottom([...document.getElementsByClassName("card")]);
     })

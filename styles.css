@@ -5,12 +5,12 @@ html {
     --fsg-color:       rgb(252, 0, 3);
     --fsg-color-weak:  rgba(252, 0, 3, 0.85);
     --default-spacing:   5vw;
-    background-color: black;
 }
 
 @media screen and (max-width: 1000px) {
     html {
         font-size: 40px;
+        background-color: black;
     }
 }
 
@@ -302,6 +302,24 @@ section > .section-content > .sideway-scrollable-container {
     z-index: 0;
 }
 
+.leaflet-control-attribution:not(#booster) {
+    /* Overwrites the control attribution in leaflet */
+    margin-bottom: 0.5rem;
+    margin-right:  0.5rem;
+    border-radius: 0.5rem;
+    font-size:     0.6rem;
+    padding-left:  0.5rem;
+    padding-right: 0.5rem;
+    color:         #555;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(13px);
+}
+
+.leaflet-control-attribution:not(#booster) a {
+    text-decoration: none;
+    color:         #555;
+}
+
 .cancelled::before {
     position:         absolute;
     content:          "";
@@ -407,24 +425,25 @@ nav > :last-child  { margin-right: var(--default-spacing); }
 #menu-links {
     display:     flex;
     margin-left: auto;
-    flex-grow: 0;
+    flex-grow:   0;
 }
 
 #menu-links > a {
+    font-family:     Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-align:      center;
     padding-left:    1.5rem;
     padding-right:   1.5rem;
     margin-top:      auto;
     margin-bottom:   auto;
-    color:         white;
-    font-weight:     600;
-    text-wrap:       nowrap;
+    color: var(--fsg-color);
+    text-shadow:     1px 1px 10px white;
     text-decoration: none;
     transition:      0.3s;
 }
 
 #menu-links > a:hover {
-    color: black;
+    color:     white;
+    text-shadow: 1px 1px 10px gray;
 }
 
 #menu-button {
@@ -458,7 +477,9 @@ nav > :last-child  { margin-right: var(--default-spacing); }
     #menu-links > a {
         margin-top:    1rem;
         margin-bottom: 1rem;
-        text-align: right;
+        text-align:    right;
+        color:       white;
+        text-shadow:   none;
     }
 
     #menu-button {
