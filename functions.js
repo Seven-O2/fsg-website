@@ -80,7 +80,6 @@ const CreateDates = (parent, file) => {
             // [0] => Date, [1] => Place, [2] => Latitude, [3] => Longitude, [4] => Organizer, [5] => Cancelled, [6] => Logo
 
             const card = document.createElement("div");
-            card.onclick = () => window.open("https://maps.google.com/maps?hl=de&q=" + ev[2] + "," + ev[3], "_blank");
             card.classList.add("card")
             card.classList.add("clickable")
             if(ev[5] === "true") {
@@ -90,6 +89,7 @@ const CreateDates = (parent, file) => {
 
             /**** Card data container ****/
             const data = document.createElement("div");
+            data.onclick = () => window.open("https://maps.google.com/maps?hl=de&q=" + ev[2] + "," + ev[3], "_blank");
             card.appendChild(data);
 
             // Logo
@@ -135,9 +135,7 @@ const CreateDates = (parent, file) => {
             card.appendChild(mapDiv);
 
             const map = L.map(mapDiv, {attributionControl: false} ).setView([ev[2], ev[3]], 7);
-            L.maplibreGL({style: 'https://tiles.openfreemap.org/styles/liberty'}).addTo(map);
-            map.invalidateSize();
-
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
             // Move marker to center between blurred part and right bounds (bottom bound on mobile)
             let verticalCenter   = mapDiv.getBoundingClientRect().height / 2;
             let horizontalCenter = mapDiv.getBoundingClientRect().width / 2;
