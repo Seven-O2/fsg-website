@@ -82,7 +82,6 @@ const CreateDates = (parent, file) => {
         .map(e => e.split(";"))
         .forEach(ev => {
             // [0] => Date, [1] => Place, [2] => Latitude, [3] => Longitude, [4] => Organizer, [5] => Cancelled, [6] => Logo
-
             const card = document.createElement("div");
             card.classList.add("card")
             card.classList.add("clickable")
@@ -136,15 +135,24 @@ const CreateDates = (parent, file) => {
             /**** Card map container ****/
             const mapDiv = document.createElement("div");
             mapDiv.classList.add("map");
+            // Touchstart with only one finger => remind user to use multiple
+            mapDiv.addEventListener('touchstart', (event) => {
+                if (event.touches.length === 1) {
+                    mapDiv.classList.add("use-two-fingers");
+                } else {
+                    mapDiv.classList.remove("use-two-fingers");
+                }
+            });
+            mapDiv.addEventListener('touchend', (event) => {
+                mapDiv.classList.remove("use-two-fingers");
+            });
             card.appendChild(mapDiv);
 
-            const map = L.map(mapDiv).setView([ev[2], ev[3]], 7);
+            const map = L.map(mapDiv, { dragging: !L.Browser.mobile }).setView([ev[2], ev[3]], 7);
             L.tileLayer('https://tiles1-bc7b4da77e971c12cb0e069bffcf2771.skobblermaps.com/TileService/tiles/2.0/01021113210/7/{z}/{x}/{y}.png@2x?traffic=false', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map);
-            // Backup tile layers (uncomment to use)
-            // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            // L.tileLayer('https://tile-4.kartenforum.slub-dresden.de/styles/maptiler-basic-v2/{z}/{x}/{y}@2x.png').addTo(map)
+            L.marker([ev[2], ev[3]], {icon: L.icon({iconUrl: './icons/marker_pin.svg', iconSize: [40, 40], iconAnchor: [20, 40]})}).addTo(map);
 
             // Move marker to center between blurred part and right bounds (bottom bound on mobile)
             let verticalCenter   = mapDiv.getBoundingClientRect().height / 2;
@@ -152,12 +160,10 @@ const CreateDates = (parent, file) => {
             if(window.matchMedia("(max-width: 1000px)").matches) {
                 // MOBILE
                 verticalCenter   = (mapDiv.getBoundingClientRect().height - data.getBoundingClientRect().height) / 2;
-                L.marker([ev[2], ev[3]], {icon: L.icon({iconUrl: './icons/marker_pin.svg', iconSize: [80, 80], iconAnchor: [40, 80]})}).addTo(map);
                 map.setView(map.containerPointToLatLng([horizontalCenter, verticalCenter]));
             } else {
                 // DESKTOP
                 horizontalCenter = (mapDiv.getBoundingClientRect().width - data.getBoundingClientRect().width) / 2;
-                L.marker([ev[2], ev[3]], {icon: L.icon({iconUrl: './icons/marker_pin.svg', iconSize: [40, 40], iconAnchor: [20, 40]})}).addTo(map);
                 map.setView(map.containerPointToLatLng([horizontalCenter, verticalCenter]));
             }
             
@@ -194,7 +200,7 @@ const CreateRankings = (parent, phpScript) => {
                 link.classList.add("button-like");
                 link.innerHTML = name;
                 rankingContainer.appendChild(link);
+            });
         });
     });
-});
 }

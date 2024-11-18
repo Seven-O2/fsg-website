@@ -12,3 +12,8 @@ Events are saved into the `dates.csv` file. It contains the entries seen in the 
 |Date|Place|Latitude|Longitude|Organizer|Cancelled (T/F)|Logo|
 |-|-|-|-|-|-|-|
 |27. April 2024|Reichenau GR|46.82478|09.41534|GWC-Schweiz|false||
+
+The events contain a map. These maps allow the users to locate the event position. The map is based on leaflet which uses tiling services to show tiles. Following tiling-services can be used:
+https://tiles1-bc7b4da77e971c12cb0e069bffcf2771.skobblermaps.com/TileService/tiles/2.0/01021113210/7/{z}/{x}/{y}.png@2x?traffic=false
+https://tile-4.kartenforum.slub-dresden.de/styles/maptiler-basic-v2/{z}/{x}/{y}@2x.png
+https://tile.openstreetmap.org/{z}/{x}/{y}.png
