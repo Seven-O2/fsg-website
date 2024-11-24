@@ -123,13 +123,8 @@ const CreateClubsAndBoard = (parent, clubFile, boardFile) => {
                 card.appendChild(getIconWithText("/icons/mail.svg", "E-Mail Adresse", mail));
             }
         });
-    }).catch(error => {
-        console.log(error);
-        const title = document.createElement("h2");
-        title.innerHTML = "Daten konnten nicht geladen werden.";
-        parent.appendChild(title);
-    });
-    FetchCSV(clubFile).then(data => {
+        return FetchCSV(clubFile); // force loading board first, then club
+    }).then(data => {
         const clubSpacer = document.createElement("div");
         clubSpacer.classList.add("spacer");
         const clubSpacerText = document.createElement("p");
