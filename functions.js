@@ -56,31 +56,138 @@ const getIconWithText = (iconSrc, iconAlt, text) => {
 
     const container = document.createElement("div");
     container.classList.add("icon-with-text");
-    container.appendChild(icon)
+    container.appendChild(icon);
     container.appendChild(text);
     return container;
 }
 
-// Creates the dates on the webpage according to the passed file
-const CreateDates = (parent, file) => {
-    fetch(file)
+const FetchCSV = (file) => {
+    return fetch(file)
     .then(response => {
         if(response.status !== 200) {
-            const title = document.createElement("h2");
-            title.innerHTML = "Daten konnten nicht geladen werden.";
-            parent.appendChild(title);
-            throw new Error("Couldn't load data");
+            throw new Error("Couldn't load data")
         }
         return response;
     })
     .then(response => response.text())
-    .then((data) => {
-        data
+    .then((data) => data
         .split(/\r\n|\n/)
         .splice(1)
         .filter(e => e !== "")
         .map(e => e.split(";"))
-        .forEach(ev => {
+    );
+}
+
+const CreateClubsAndBoard = (parent, clubFile, boardFile) => {
+    FetchCSV(boardFile).then(data => {
+        const boardSpacer = document.createElement("div");
+        boardSpacer.classList.add("spacer");
+        const boardSpacerText = document.createElement("p");
+        boardSpacerText.innerHTML = "Vorstand";
+        boardSpacer.appendChild(boardSpacerText);
+        parent.appendChild(boardSpacer);
+        data.forEach(ev => {
+            // [0] => Title, [1] => Name, [2] => Phone, [3] => Mail, [4] => Image
+            const card = document.createElement("card");
+            card.classList.add("card");
+            parent.appendChild(card);
+            
+            // Image
+            const image = document.createElement("img");
+            image.src = "/images/board/" + ev[4];
+            image.alt = "Bild von " + ev[0];
+            image.classList.add("circle")
+            card.appendChild(image);
+            
+            // Title
+            const title = document.createElement("h2");
+            title.innerHTML = ev[0];
+            card.appendChild(title);
+
+            // Name
+            const name = document.createElement("p");
+            name.innerHTML = ev[1];
+            card.appendChild(getIconWithText("/icons/user.svg", "Person", name));
+
+            // Phone
+            if(ev[2] !== "") {
+                const phone = document.createElement("p");
+                phone.innerHTML = ev[2];
+                card.appendChild(getIconWithText("/icons/phone.svg", "Telefonnummer", phone));
+            }
+
+            // Mail
+            if(ev[3] !== "") {
+                const mail = document.createElement("p");
+                mail.innerHTML = ev[3];
+                card.appendChild(getIconWithText("/icons/mail.svg", "E-Mail Adresse", mail));
+            }
+        });
+    }).catch(error => {
+        console.log(error);
+        const title = document.createElement("h2");
+        title.innerHTML = "Daten konnten nicht geladen werden.";
+        parent.appendChild(title);
+    });
+    FetchCSV(clubFile).then(data => {
+        const clubSpacer = document.createElement("div");
+        clubSpacer.classList.add("spacer");
+        const clubSpacerText = document.createElement("p");
+        clubSpacerText.innerHTML = "Vorstand";
+        clubSpacer.appendChild(clubSpacerText);
+        parent.appendChild(clubSpacer);
+        data.forEach(ev => {
+            // [0] => Title, [1] => Person, [2] => Mail, [3] => Phone, [4] => Image, [5] => Website
+            const card = document.createElement("card");
+            card.classList.add("card");
+            if(ev[5] !== "") {
+                card.classList.add("clickable");
+                card.onclick = () => window.open(ev[5],'_blank');
+            }
+            parent.appendChild(card);
+
+            // Image
+            const image = document.createElement("img");
+            image.src = "/images/clubs/" + ev[4];
+            image.alt = "Logo von " + ev[0];
+            card.appendChild(image);
+
+            // Title
+            const title = document.createElement("h2");
+            title.innerHTML = ev[0];
+            card.appendChild(title);
+
+            // Name
+            const name = document.createElement("p");
+            name.innerHTML = ev[1];
+            card.appendChild(getIconWithText("/icons/user.svg", "Person", name));
+
+            // Phone
+            if(ev[2] !== "") {
+                const phone = document.createElement("p");
+                phone.innerHTML = ev[2];
+                card.appendChild(getIconWithText("/icons/phone.svg", "Telefonnummer", phone));
+            }
+
+            // Mail
+            if(ev[3] !== "") {
+                const mail = document.createElement("p");
+                mail.innerHTML = ev[3];
+                card.appendChild(getIconWithText("/icons/mail.svg", "E-Mail Adresse", mail));
+            }
+        })
+    }).catch(error => {
+        console.log(error);
+        const title = document.createElement("h2");
+        title.innerHTML = "Daten konnten nicht geladen werden.";
+        parent.appendChild(title);
+    });
+}
+
+// Creates the dates on the webpage according to the passed file
+const CreateDates = (parent, file) => {
+    FetchCSV(file).then(data => {
+        data.forEach(ev => {
             // [0] => Title, [1] => Subtitle, [2] => Date, [3] => Latitude, [4] => Longitude, [5] => Organizer, [6] => Cancelled, [7] => Logo
             const card = document.createElement("div");
             card.classList.add("map-card");
@@ -183,7 +290,11 @@ const CreateDates = (parent, file) => {
             
         });
         FlyInFromBottom([...document.getElementsByClassName("map-card")]);
-    })
+    }).catch(_ => {
+        const title = document.createElement("h2");
+        title.innerHTML = "Daten konnten nicht geladen werden.";
+        parent.appendChild(title);
+    });
 }
 
 // Creates the rankings given by the selected PHP Script (executed server side)
