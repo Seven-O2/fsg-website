@@ -4,11 +4,30 @@ Repostiory containing the source code for the official swiss offroader federatio
 
 Since this will be running on a php enabled server, some php is added to traverse the file system (for the rankings, so they are added automatically). Also, the events may be added by a simple .csv file.
 
+## Adding new board members or clubs
+Board members and clubs are displayed in a container at the beginning of the website in the about section. Since these can change sometimes (and strictly copy pasting the same cards all over is bad anyway), `.csv` are used to display them. They are kind of used as small databases.
+
+### Board
+Board members are saved at `/data/board.csv`. It contains the board members formatted as the table below:
+|title|name|phone|mail|image|
+|-|-|-|-|-|
+|Member|Max Mustermann|+41 76 123 45 67|mm@email.com|mmustermann.jpg|
+
+Phone/Mail are optional, the image should be the filename for a file saved at `images/board`.
+
+### Clubs
+Clubs are saved at `/data/clubs.csv`. It contains the clubs formatted as the table below:
+|title|Person|phone|mail|image|website|
+|-|-|-|-|-|-|
+|Member Club|Max Mustermann|+41 76 123 45 67|mm@email.com|musterclub.jpg|memberclub.com|
+
+Phone/Mail and website are optional, the image should be the filename for a file saved at `/images/clubs`. If a website is provided, the card becomes clickable
+
 ## Adding new rankings
 Simply put the ranking into `/document/rankings/{year}/{MM_DD_PLACE.pdf}`, where `MM` represents the month and `DD` represents the day (this will be formatted).
 
 ## Adding events
-Events are saved into the `dates.csv` file. It contains the entries seen in the table below.
+Events are saved into the `/data/dates.csv` file. It contains the entries seen in the table below.
 |Title|Subtitle|Date|Latitude|Longitude|Organizer|Cancelled (T/F)|Eurotrial (T/F)|
 |-|-|-|-|-|-|-|-|
 |Reichenau, GR|2. Lauf|27. April 2024|46.82478|09.41534|GWC-Schweiz|false|false|
