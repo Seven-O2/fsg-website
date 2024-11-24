@@ -81,11 +81,11 @@ const CreateDates = (parent, file) => {
         .filter(e => e !== "")
         .map(e => e.split(";"))
         .forEach(ev => {
-            // [0] => Date, [1] => Place, [2] => Latitude, [3] => Longitude, [4] => Organizer, [5] => Cancelled, [6] => Logo
+            // [0] => Title, [1] => Subtitle, [2] => Date, [3] => Latitude, [4] => Longitude, [5] => Organizer, [6] => Cancelled, [7] => Logo
             const card = document.createElement("div");
-            card.classList.add("card");
+            card.classList.add("map-card");
             card.classList.add("clickable");
-            if(ev[5] === "true") {
+            if(ev[6] === "true") {
                 card.classList.add("cancelled");
             }
             // if mouse up has same position as mouse down, open google maps
@@ -104,7 +104,7 @@ const CreateDates = (parent, file) => {
             card.appendChild(data);
 
             // Logo
-            if(ev[6] === "true") {
+            if(ev[7] === "true") {
                 const logo = document.createElement("img");
                 logo.classList.add("event-logo");
                 logo.src = "/images/eurotrial.png";
@@ -116,28 +116,34 @@ const CreateDates = (parent, file) => {
             const title = document.createElement("h2");
             title.innerHTML = ev[0];
             data.appendChild(title);
+
+            // Subtitle
+            const subtitle = document.createElement("h4");
+            subtitle.innerHTML = ev[1];
+            data.appendChild(subtitle);
+
+            // Date
+            const date = document.createElement("p");
+            date.innerHTML = ev[2];
+            data.appendChild(getIconWithText("./icons/calendar.svg", "Datum", date))
             
             // Place
             const place = document.createElement("div");
-            const name = document.createElement("p")
-            place.innerHTML = ev[1];
-            place.appendChild(name);
-
             const lat = document.createElement("p");
             lat.classList.add("mono");
-            lat.innerHTML = ev[2] + "° N";
+            lat.innerHTML = ev[3] + "° N";
             place.appendChild(lat);
 
             const lng = document.createElement("p");
             lng.classList.add("mono");
-            lng.innerHTML = ev[3] + "° E";
+            lng.innerHTML = ev[4] + "° E";
             place.appendChild(lng);
 
             data.appendChild(getIconWithText("./icons/map_pin.svg", "Ortschaft", place))
 
             // Organizer
             const organizer = document.createElement("p");
-            organizer.innerHTML = ev[4];
+            organizer.innerHTML = ev[5];
             data.appendChild(getIconWithText("./icons/user.svg", "Organisator", organizer))
 
             /**** Card map container ****/
@@ -156,11 +162,11 @@ const CreateDates = (parent, file) => {
             });
             card.appendChild(mapDiv);
 
-            const map = L.map(mapDiv, { dragging: !L.Browser.mobile }).setView([ev[2], ev[3]], 7);
+            const map = L.map(mapDiv, { dragging: !L.Browser.mobile }).setView([ev[3], ev[4]], 7);
             L.tileLayer('https://tiles1-bc7b4da77e971c12cb0e069bffcf2771.skobblermaps.com/TileService/tiles/2.0/01021113210/7/{z}/{x}/{y}.png@2x?traffic=false', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map);
-            L.marker([ev[2], ev[3]], {icon: L.icon({iconUrl: './icons/marker_pin.svg', iconSize: [40, 40], iconAnchor: [20, 40]})}).addTo(map);
+            L.marker([ev[3], ev[4]], {icon: L.icon({iconUrl: './icons/marker_pin.svg', iconSize: [40, 40], iconAnchor: [20, 40]})}).addTo(map);
 
             // Move marker to center between blurred part and right bounds (bottom bound on mobile)
             let verticalCenter   = mapDiv.getBoundingClientRect().height / 2;
@@ -176,7 +182,7 @@ const CreateDates = (parent, file) => {
             }
             
         });
-        FlyInFromBottom([...document.getElementsByClassName("card")]);
+        FlyInFromBottom([...document.getElementsByClassName("map-card")]);
     })
 }
 

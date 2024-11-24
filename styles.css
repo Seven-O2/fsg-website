@@ -36,6 +36,12 @@ h3 {
     font-weight:   bolder;
 }
 
+h4 {
+    font-size: 1rem;
+    color:     gray;
+    margin: 0;
+}
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -105,7 +111,6 @@ section > .section-content > * {
 }
 
 /* Sideways scrollable */
-/*  container with width of 20rem, adjusts default padding */
 .sideway-scrollable-container {
     scrollbar-width: none;
     position:        relative;
@@ -122,56 +127,6 @@ section > .section-content > * {
     display: none;
 }
 
-.sideway-scrollable-container > div:not(.spacer, .hint) {
-    min-width:       20rem;
-    max-width:       20rem;
-    padding:         1rem;
-    margin-right:    2rem;
-    box-shadow:      0px 2px 10px rgba(0, 0, 0, 0.4);
-    border-radius:   1rem;
-    z-index:         2;
-    overflow:        hidden;
-    transition:      0.1s;
-}
-
-.sideway-scrollable-container > div > img /* Leading image */ {
-    height:        7rem;
-    margin-bottom: 1rem;
-    display:       block;
-    object-fit:    contain;
-    margin-left:   auto;
-    margin-right:  auto;
-}
-
-.sideway-scrollable-container > div:has(img.full) {
-    padding: 0;
-}
-
-.sideway-scrollable-container > div:has(img.full) > p {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-}
-
-.sideway-scrollable-container > div > img.full {
-    width:        100%;
-    height:       auto;
-    display:      block;
-    object-fit:   contain;
-}
-
-.sideway-scrollable-container p {
-    margin: 0;
-}
-
-/* Fix to use full width of screen */
-section > .section-content > .sideway-scrollable-container {
-    margin-left:   0;
-    margin-right:  0;
-    padding-left:  var(--default-spacing);
-    padding-right: var(--default-spacing);
-}
-
 /* Hint to scroll to right */
 .sideway-scrollable-container > .hint {
     bottom:    0;
@@ -181,7 +136,7 @@ section > .section-content > .sideway-scrollable-container {
     animation: bounceHorizontal infinite 2s;
 }
 
-/* Spacer with a title */
+/* Sidway scrollable container's spacer with a title */
 .sideway-scrollable-container > .spacer {
     padding: 0.5rem;
     display: flex;
@@ -190,8 +145,7 @@ section > .section-content > .sideway-scrollable-container {
 
 .sideway-scrollable-container > .spacer > p {
     writing-mode: vertical-rl;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin: 0.5rem 0;
     color: lightgray;
 }
 
@@ -205,6 +159,63 @@ section > .section-content > .sideway-scrollable-container {
     border: solid 1px lightgray;
 }
 
+/* Fix to use full width of screen */
+section > .section-content > .sideway-scrollable-container {
+    margin-left:   0;
+    margin-right:  0;
+    padding-left:  var(--default-spacing);
+    padding-right: var(--default-spacing);
+}
+
+/* Card */
+.card {
+    min-width:       20rem;
+    max-width:       20rem;
+    padding:         1rem;
+    margin-right:    2rem;
+    box-shadow:      0px 2px 10px rgba(0, 0, 0, 0.4);
+    border-radius:   1rem;
+    z-index:         2;
+    overflow:        hidden;
+    transition:      0.1s;
+}
+
+.card > img /* Leading image */ {
+    height:        7rem;
+    margin-bottom: 1rem;
+    display:       block;
+    object-fit:    contain;
+    margin-left:   auto;
+    margin-right:  auto;
+}
+
+.card > img.circle {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.card:has(img.full) {
+    padding: 0;
+}
+
+.card:has(img.full) > p {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card > img.full {
+    width:        100%;
+    height:       auto;
+    display:      block;
+    object-fit:   contain;
+}
+
+.card p {
+    margin: 0;
+}
+
 /* Filler */
 .horizontal-spacer {
     width: 100%;
@@ -214,7 +225,19 @@ section > .section-content > .sideway-scrollable-container {
     height: 100%;
 }
 
-/* General classes */
+/* Page which has no real design */
+.info-page {
+    padding: var(--default-spacing);
+    background-color: white;
+}
+
+/* When clickable, hovering will change the box shadow and cursor */
+.clickable:hover:not(#booster) {
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.6);
+    cursor:     pointer;
+}
+
+/* Changes font to mono */
 .mono {
     font-family: monospace;
 }
@@ -241,8 +264,8 @@ section > .section-content > .sideway-scrollable-container {
 /* Vertically aligned text with icon before */
 .icon-with-text {
     display:       flex;
-    margin-top:    auto;
-    margin-bottom: auto;
+    margin-top:    0.25rem;
+    margin-bottom: 0.25rem
 }
 
 .icon-with-text > img {
@@ -254,28 +277,19 @@ section > .section-content > .sideway-scrollable-container {
     margin: 0;
 }
 
-.icon-with-text > div {
-    margin-bottom: 0.5rem;
-}
-
-.icon-with-text > div > *:not(:first-child) {
-    color: gray;
-    font-size: 0.8rem;
-}
-
-/* Card */
-.card {
+/* Map Card */
+.map-card {
     position:        relative;
     display:         flex;
     box-shadow:      0px 2px 10px rgba(0, 0, 0, 0.4);
     border-radius:   1rem;
-    min-height:      12rem;
+    min-height:      13rem;
     overflow:        hidden;
     transition:      0.1s;
     backdrop-filter: blur(17px);
 }
 
-.card > *:first-child {
+.map-card > *:first-child {
     position:        absolute;
     box-sizing:      border-box; /* Makes height calculation 100% including padding */
     height:          100%;
@@ -288,29 +302,33 @@ section > .section-content > .sideway-scrollable-container {
     mask: linear-gradient(to right, black 0%, black 95%, transparent 100%)
 }
 
-.card h2 {
+.map-card h2 {
+    margin-bottom: 0;
+}
+
+.map-card h4 {
     margin-bottom: 1rem;
 }
 
-.card p {
+.map-card p {
     margin:     0;
     text-align: left;
 }
 
-.card .event-logo {
+.map-card .event-logo {
     position: absolute;
-    right:    0;
-    top:      2.5rem;
-    height:   70%;
+    right:    10%;
+    top:      0;
+    height:   5rem;
 }
 
-.card > .map {
+.map-card > .map {
     border:  none;
     width:   100%;
     z-index: 0;
 }
 
-.card >.map.use-two-fingers::before {
+.map-card >.map.use-two-fingers::before {
     content:          "Zwei Finger zum Zoomen verwenden.";
     display:          flex;
     justify-content:  center;
@@ -366,28 +384,28 @@ section > .section-content > .sideway-scrollable-container {
 }
 
 @media screen and (max-width: 1000px) {
-    .card {
+    .map-card {
         flex-direction: column;
     }
 
-    .card > *:first-child {
+    .map-card > *:first-child {
         height: auto;
         min-width: 100%;
         max-width: 100%;
         mask: linear-gradient(to bottom, black 0%, black 95%, transparent 100%)
     }
 
-    .card > .map {
+    .map-card > .map {
         height: 100vw;
     }
 
-    /* icon with text in card, all childs are appended inline */
-    .card .icon-with-text > div > *:not(:first-child) {
+    /* icon with text in map-card, all childs are appended inline */
+    .map-card .icon-with-text > div > * {
         display: inline;
         margin-right: 0.5rem;
     }
 
-    .card .icon-with-text > div > *:not(:first-child):not(:last-child)::after  {
+    .map-card .icon-with-text > div > *:not(:last-child)::after  {
         content: ",";
     }
 }
@@ -411,16 +429,6 @@ section > .section-content > .sideway-scrollable-container {
 
 .red { background-color: #bd1919CC; }
 .red p, .red h3 { color: white; }
-
-.info-page {
-    padding: var(--default-spacing);
-    background-color: white;
-}
-
-.clickable:hover:not(#booster) {
-    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.6);
-    cursor:     pointer;
-}
 
 /**************************** Size navigation (menu/titlebar) ****************************/
 nav {
