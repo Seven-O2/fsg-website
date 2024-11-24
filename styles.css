@@ -46,13 +46,16 @@ p {
 }
 
 footer {
-    height: 10vh;
+    height:           10vh;
     padding:          var(--default-spacing);
     background-color: var(--fsg-color);
-    display:          flex;
 }
 
-footer > a {
+footer > div {
+    display: flex;
+}
+
+footer a {
     text-decoration: none;
     color:         white;
     margin-top:      auto;
@@ -61,7 +64,12 @@ footer > a {
     transition:      all 0.2s;
 }
 
-footer > a:hover {
+footer > p.copyright {
+    color: white;
+    font-size: 0.5rem;
+}
+
+footer a:hover {
     color:         lightgray;
 }
 
@@ -449,15 +457,15 @@ nav > :last-child  { margin-right: var(--default-spacing); }
     padding-right:   1.5rem;
     margin-top:      auto;
     margin-bottom:   auto;
-    color: var(--fsg-color);
-    text-shadow:     1px 1px 10px white;
+    color:           var(--fsg-color);
+    text-shadow:     0 0 10px white;
     text-decoration: none;
     transition:      0.3s;
 }
 
 #menu-links > a:hover {
     color:     white;
-    text-shadow: 1px 1px 10px gray;
+    text-shadow:     0 0 10px gray;
 }
 
 #menu-button {

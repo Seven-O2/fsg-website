@@ -83,16 +83,24 @@ const CreateDates = (parent, file) => {
         .forEach(ev => {
             // [0] => Date, [1] => Place, [2] => Latitude, [3] => Longitude, [4] => Organizer, [5] => Cancelled, [6] => Logo
             const card = document.createElement("div");
-            card.classList.add("card")
-            card.classList.add("clickable")
+            card.classList.add("card");
+            card.classList.add("clickable");
             if(ev[5] === "true") {
-                card.classList.add("cancelled")
+                card.classList.add("cancelled");
             }
+            // if mouse up has same position as mouse down, open google maps
+            let mousePosition = undefined;
+            card.onmousedown = (e) => { mousePosition = {x: e.clientX, y: e.clientY}; }
+            card.onmouseup = (e) => {
+                if(mousePosition && mousePosition.x === e.clientX && mousePosition.y === e.clientY) {
+                    window.open("https://maps.google.com/maps?hl=de&q=" + ev[2] + "," + ev[3], "_blank");
+                }
+            }
+            
             parent.appendChild(card);
 
             /**** Card data container ****/
             const data = document.createElement("div");
-            data.onclick = () => window.open("https://maps.google.com/maps?hl=de&q=" + ev[2] + "," + ev[3], "_blank");
             card.appendChild(data);
 
             // Logo
