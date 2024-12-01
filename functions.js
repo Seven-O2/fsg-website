@@ -107,20 +107,20 @@ const CreateClubsAndBoard = (parent, clubFile, boardFile) => {
             // Name
             const name = document.createElement("p");
             name.innerHTML = ev[1];
-            card.appendChild(getIconWithText("/icons/user.svg", "Person", name));
+            card.appendChild(getIconWithText("/images/icons/user.svg", "Person", name));
 
             // Phone
             if(ev[2] !== "") {
                 const phone = document.createElement("p");
                 phone.innerHTML = ev[2];
-                card.appendChild(getIconWithText("/icons/phone.svg", "Telefonnummer", phone));
+                card.appendChild(getIconWithText("/images/icons/phone.svg", "Telefonnummer", phone));
             }
 
             // Mail
             if(ev[3] !== "") {
                 const mail = document.createElement("p");
                 mail.innerHTML = ev[3];
-                card.appendChild(getIconWithText("/icons/mail.svg", "E-Mail Adresse", mail));
+                card.appendChild(getIconWithText("/images/icons/mail.svg", "E-Mail Adresse", mail));
             }
         });
         return FetchCSV(clubFile); // force loading board first, then club
@@ -155,20 +155,20 @@ const CreateClubsAndBoard = (parent, clubFile, boardFile) => {
             // Name
             const name = document.createElement("p");
             name.innerHTML = ev[1];
-            card.appendChild(getIconWithText("/icons/user.svg", "Person", name));
+            card.appendChild(getIconWithText("/images/icons/user.svg", "Person", name));
 
             // Phone
             if(ev[2] !== "") {
                 const phone = document.createElement("p");
                 phone.innerHTML = ev[2];
-                card.appendChild(getIconWithText("/icons/phone.svg", "Telefonnummer", phone));
+                card.appendChild(getIconWithText("/images/icons/phone.svg", "Telefonnummer", phone));
             }
 
             // Mail
             if(ev[3] !== "") {
                 const mail = document.createElement("p");
                 mail.innerHTML = ev[3];
-                card.appendChild(getIconWithText("/icons/mail.svg", "E-Mail Adresse", mail));
+                card.appendChild(getIconWithText("/images/icons/mail.svg", "E-Mail Adresse", mail));
             }
         })
     }).catch(error => {
@@ -227,7 +227,7 @@ const CreateDates = (parent, file) => {
             // Date
             const date = document.createElement("p");
             date.innerHTML = ev[2];
-            data.appendChild(getIconWithText("./icons/calendar.svg", "Datum", date))
+            data.appendChild(getIconWithText("./images/icons/calendar.svg", "Datum", date))
             
             // Place
             const place = document.createElement("div");
@@ -241,12 +241,12 @@ const CreateDates = (parent, file) => {
             lng.innerHTML = ev[4] + "° E";
             place.appendChild(lng);
 
-            data.appendChild(getIconWithText("./icons/map_pin.svg", "Ortschaft", place))
+            data.appendChild(getIconWithText("./images/icons/map_pin.svg", "Ortschaft", place))
 
             // Organizer
             const organizer = document.createElement("p");
             organizer.innerHTML = ev[5];
-            data.appendChild(getIconWithText("./icons/user.svg", "Organisator", organizer))
+            data.appendChild(getIconWithText("./images/icons/user.svg", "Organisator", organizer))
 
             /**** Card map container ****/
             const mapDiv = document.createElement("div");
@@ -268,7 +268,7 @@ const CreateDates = (parent, file) => {
             L.tileLayer('https://tiles1-bc7b4da77e971c12cb0e069bffcf2771.skobblermaps.com/TileService/tiles/2.0/01021113210/7/{z}/{x}/{y}.png@2x?traffic=false', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map);
-            L.marker([ev[3], ev[4]], {icon: L.icon({iconUrl: './icons/marker_pin.svg', iconSize: [40, 40], iconAnchor: [20, 40]})}).addTo(map);
+            L.marker([ev[3], ev[4]], {icon: L.icon({iconUrl: './images/icons/marker_pin.svg', iconSize: [40, 40], iconAnchor: [20, 40]})}).addTo(map);
 
             // Move marker to center between blurred part and right bounds (bottom bound on mobile)
             let verticalCenter   = mapDiv.getBoundingClientRect().height / 2;
