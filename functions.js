@@ -48,6 +48,38 @@ const FlyInFromBottom = (elements) => {
     }, false);
 }
 
+// Allows a veritcally scrollable container to be grabbed by a mouse event and moved
+const VerticallyScrollableByDrag = (elements) => {
+    Array.from(elements).forEach(element => { 
+        let canDrag = false;
+        let initialMousePositionX;
+        let initialScrollPosition;
+
+        element.addEventListener('mousedown', (e) => {
+            canDrag               = true;
+            element.style.cursor  = 'grabbing';
+            initialMousePositionX = e.pageX;
+            initialScrollPosition = element.scrollLeft;
+        });
+    
+        element.addEventListener('mouseleave', () => {
+            canDrag              = false;
+            element.style.cursor = 'grab';
+        });
+    
+        element.addEventListener('mouseup', () => {
+            canDrag              = false;
+            element.style.cursor = 'grab';
+        });
+    
+        element.addEventListener('mousemove', (e) => {
+            if (!canDrag) return;
+            e.preventDefault();
+            element.scrollLeft = initialScrollPosition - (e.pageX /* mouse position */ - initialMousePositionX);
+        });
+    });
+}
+
 // Creates an icon with text for the passed icon and text
 const getIconWithText = (iconSrc, iconAlt, text) => {
     icon = document.createElement("img");

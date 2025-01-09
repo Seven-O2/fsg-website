@@ -5,6 +5,8 @@ html {
     --fsg-color:       rgb(252, 0, 3);
     --fsg-color-weak:  rgba(252, 0, 3, 0.85);
     --default-spacing:   5vw;
+    width:               100vw;
+    overflow-x:          hidden;
 }
 
 @media screen and (max-width: 1000px) {
@@ -112,15 +114,18 @@ section > .section-content > * {
 
 /* Sideways scrollable */
 .sideway-scrollable-container {
-    scrollbar-width: none;
-    position:        relative;
-    display:         flex;
-    overflow:        auto;
-    scrollbar-width: none;
-    padding-top:     1rem;
-    padding-bottom:  2rem;
-    padding-left:    var(--default-spacing);
-    padding-right:   var(--default-spacing);
+    scrollbar-width:     none;
+    position:            relative;
+    display:             flex;
+    overflow:            auto;
+    scrollbar-width:     none;
+    padding-top:         1rem;
+    padding-bottom:      2rem;
+    padding-left:        var(--default-spacing);
+    padding-right:       var(--default-spacing);
+    cursor:              grab;
+    user-select:         none;
+    -webkit-user-select: none;
 }
 
 .sideway-scrollable-container::-webkit-scrollbar {
@@ -598,8 +603,8 @@ nav > :last-child  { margin-right: var(--default-spacing); }
 .regulations-container {
     display: flex;
     justify-content:space-between;
-    padding-left: 20vw;
-    padding-right: 20vw;
+    padding-left: var(--default-spacing);
+    padding-right: var(--default-spacing);
 }
 
 @media screen and (max-width: 1000px) { 
