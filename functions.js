@@ -94,7 +94,7 @@ const getIconWithText = (iconSrc, iconAlt, text) => {
 }
 
 const FetchCSV = (file) => {
-    return fetch(file)
+    return fetch(file, { cache: 'no-cache' })
     .then(response => {
         if(response.status !== 200) {
             throw new Error("Couldn't load data")
@@ -241,7 +241,7 @@ const CreateDates = (parent, file) => {
             if(ev[7] === "true") {
                 const logo = document.createElement("img");
                 logo.classList.add("event-logo");
-                logo.src = "/images/eurotrial.png";
+                logo.src = "/images/icons/eurotrial.png";
                 logo.alt = "Logo der Veranstaltung";
                 data.appendChild(logo);
             }
