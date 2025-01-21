@@ -42,8 +42,16 @@
       <h1 class="section-title">Über uns</h1>
       <div class="section-content">
         <p>Die FSG (Föderation Schweizerischer Geländewagenclubs) ist ein Dachverband verschiedener Geländewagenclubs und Vereinigungen, die sich der Ausübung, Erhaltung und Förderung des Geländewagen-Trialsports zum Ziel gesetzt hat. Die FSG ist die einzige nationale Sportorganisation der Schweiz für alle Arten des Offroads.</p>
+        <div class="switch">
+          <p>Vorstand</p>
+          <label>
+            <input type="checkbox">
+            <span></span>
+          </label>
+          <p>Clubs</p>
+        </div>
         <div class="sideway-scrollable-container">
-          <div class="hint">Clubs & Vorstand →</div>
+          <div class="hint"></div>
           <!-- Vorstand and Clubs filled in by js and csvs -->
         </div>
         <div class="bylaws-container"><a class="button-like" href="./documents/fsg_statuten.pdf" target="_blank">Statuten</a></div>
@@ -130,7 +138,7 @@
       if(window.screen.width > 1000) {
           FollowMouse([document.getElementById("title-image"), document.getElementById("title-image-overlay")]);
       }
-      CreateClubsAndBoard(document.getElementById("about").getElementsByClassName("sideway-scrollable-container")[0], "/data/clubs.csv", "/data/board.csv");
+      CreateClubsAndBoard(document.getElementById("about").getElementsByClassName("sideway-scrollable-container")[0], document.getElementById("about").getElementsByClassName("switch")[0].getElementsByTagName("input")[0], "/data/clubs.csv", "/data/board.csv");
       CreateRankings(document.getElementById("rangliste").getElementsByClassName("section-content")[0], "/documents/rankings/list_rankings.php");
       CreateDates(document.getElementById("termine").getElementsByClassName("section-content")[0], "/data/dates.csv")
     </script>

@@ -138,7 +138,13 @@ section > .section-content > * {
     right:     1rem;
     position:  absolute;
     color:     lightgray;
-    animation: bounceHorizontal infinite 2s;
+    animation: bounceHorizontalRight infinite 2s;
+}
+
+.sideway-scrollable-container > .hint.left {
+    right: 0;
+    left: 1rem;
+    animation: bounceHorizontalLeft infinite 2s;
 }
 
 /* Sidway scrollable container's spacer with a title */
@@ -280,6 +286,78 @@ section > .section-content > .sideway-scrollable-container {
 
 .icon-with-text > p {
     margin: 0;
+}
+
+/* Switch */
+.switch {
+    display: flex;
+    justify-content: center;
+}
+
+.switch > p {
+    font-size:     1.2rem;
+    margin-top:    auto;
+    margin-bottom: auto;
+    color:       lightgray;
+    transition:    .4s;
+    width:         5rem;
+}
+
+.switch > p:first-child {
+    text-align: right;
+}
+
+.switch:not(:has(input:checked)) > :first-child{
+    color: red;
+}
+
+.switch:has(input:checked) > :last-child{
+    color: red;
+}
+
+.switch > label {
+    --switch-width:   4rem;
+    --switch-heigth:  1.8rem;
+    --switch-padding: 0.2rem;
+    margin:           auto 2rem;
+    position:         relative;
+    display:          inline-block;
+    width:            var(--switch-width);
+    height:           var(--switch-heigth);
+}
+
+.switch > label > input {
+    opacity: 0;
+    width:   0;
+    height:  0;
+}
+
+.switch > label > span {
+    position:         absolute;
+    cursor:           pointer;
+    top:              0;
+    left:             0;
+    right:            0;
+    bottom:           0;
+    background-color: lightgray;
+    border-radius:    var(--switch-heigth);
+    transition:       .4s;
+}
+
+.switch > label > span::before {
+    content:          "";
+    position:         absolute;
+    height:           calc(var(--switch-heigth) - 2 * var(--switch-padding));
+    width:            calc(var(--switch-heigth) - 2 * var(--switch-padding));
+    left:             var(--switch-padding);
+    bottom:           var(--switch-padding);
+    background-color: white;
+    border-radius:    var(--switch-heigth);
+    transition:       .4s;
+}
+
+.switch > label > input:checked + span::before {
+    transform: translateX(calc(var(--switch-width) - var(--switch-heigth)));
 }
 
 /* Map Card */
@@ -611,6 +689,11 @@ nav > :last-child  { margin-right: var(--default-spacing); }
     .regulations-container {
         padding-left:  0;
         padding-right: 0;
+        flex-direction: column;
+    }
+
+    .regulations-container > *:not(:last-child) {
+        margin-bottom: 1rem;
     }
 }
 
@@ -646,7 +729,7 @@ nav > :last-child  { margin-right: var(--default-spacing); }
     }
 }
 
-@keyframes bounceHorizontal {
+@keyframes bounceHorizontalRight {
     0% {
         transform: translateX(0);
     }
@@ -664,6 +747,30 @@ nav > :last-child  { margin-right: var(--default-spacing); }
     }
     50% {
         transform: translateX(2.5px);
+    }
+    60% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounceHorizontalLeft {
+    0% {
+        transform: translateX(0);
+    }
+    10% {
+        transform: translateX(-7.5px);
+    }
+    20% {
+        transform: translateX(2.5px);
+    }
+    30% {
+        transform: translateX(-5px);
+    }
+    40% {
+        transform: translateX(2.5px);
+    }
+    50% {
+        transform: translateX(-2.5px);
     }
     60% {
         transform: translateX(0);

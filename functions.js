@@ -110,17 +110,16 @@ const FetchCSV = (file) => {
     );
 }
 
-const CreateClubsAndBoard = (parent, clubFile, boardFile) => {
+const CreateClubsAndBoard = (parent, sw, clubFile, boardFile) => {
+    const boardCards = [];
+    const clubCards = [];
+    const hint = parent.getElementsByClassName("hint")[0];
+    hint.innerHTML = "Vorstand →";
     FetchCSV(boardFile).then(data => {
-        const boardSpacer = document.createElement("div");
-        boardSpacer.classList.add("spacer");
-        const boardSpacerText = document.createElement("p");
-        boardSpacerText.innerHTML = "Vorstand";
-        boardSpacer.appendChild(boardSpacerText);
-        parent.appendChild(boardSpacer);
         data.forEach(ev => {
             // [0] => Title, [1] => Name, [2] => Phone, [3] => Mail, [4] => Image
             const card = document.createElement("card");
+            boardCards.push(card);
             card.classList.add("card");
             parent.appendChild(card);
             
@@ -157,15 +156,11 @@ const CreateClubsAndBoard = (parent, clubFile, boardFile) => {
         });
         return FetchCSV(clubFile); // force loading board first, then club
     }).then(data => {
-        const clubSpacer = document.createElement("div");
-        clubSpacer.classList.add("spacer");
-        const clubSpacerText = document.createElement("p");
-        clubSpacerText.innerHTML = "Vorstand";
-        clubSpacer.appendChild(clubSpacerText);
-        parent.appendChild(clubSpacer);
         data.forEach(ev => {
             // [0] => Title, [1] => Person, [2] => Mail, [3] => Phone, [4] => Image, [5] => Website
             const card = document.createElement("card");
+            clubCards.push(card);
+            card.style.display = "none";
             card.classList.add("card");
             if(ev[5] !== "") {
                 card.classList.add("clickable");
@@ -208,6 +203,18 @@ const CreateClubsAndBoard = (parent, clubFile, boardFile) => {
         const title = document.createElement("h2");
         title.innerHTML = "Daten konnten nicht geladen werden.";
         parent.appendChild(title);
+    });
+    
+    sw.addEventListener('change', event => {
+        if(event.target.checked) {
+            hint.innerHTML = "Clubs →"
+            boardCards.forEach(b => b.style.display = "none");
+            clubCards.forEach(b => b.style.display = "block");
+        } else {
+            hint.innerHTML = "Vorstand →"
+            boardCards.forEach(b => b.style.display = "block");
+            clubCards.forEach(b => b.style.display = "none");
+        }
     });
 }
 
