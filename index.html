@@ -127,19 +127,20 @@
     </footer>
   </body>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> <!-- Leaflet -->
-  <script src="./functions.js"></script>
-    <script>
-      FollowScrollInverse([document.getElementById("title-text-container")]);
-      FlyInFromBottom([...document.getElementsByClassName("section-title")]);
-      FlyInFromBottom([...document.getElementsByClassName("sideway-scrollable-container")]);
-      VerticallyScrollableByDrag([...document.getElementsByClassName("sideway-scrollable-container")]);
+  <script type="module">
+    import * as animations from "/js/animations.js"
+    import * as dynamicBuilder from "/js/dynamicBuilder.js"
+    animations.followScrollInverse([document.getElementById("title-text-container")]);
+    animations.flyInFromBottom([...document.getElementsByClassName("section-title")]);
+    animations.flyInFromBottom([...document.getElementsByClassName("sideway-scrollable-container")]);
+    animations.mouseDragSideways([...document.getElementsByClassName("sideway-scrollable-container")]);
   
-      // Title image follow mouse (if applicable)
-      if(window.screen.width > 1000) {
-          FollowMouse([document.getElementById("title-image"), document.getElementById("title-image-overlay")]);
-      }
-      CreateClubsAndBoard(document.getElementById("about").getElementsByClassName("sideway-scrollable-container")[0], document.getElementById("about").getElementsByClassName("switch")[0].getElementsByTagName("input")[0], "/data/clubs.csv", "/data/board.csv");
-      CreateRankings(document.getElementById("rangliste").getElementsByClassName("section-content")[0], "/documents/rankings/list_rankings.php");
-      CreateDates(document.getElementById("termine").getElementsByClassName("section-content")[0], "/data/dates.csv")
-    </script>
+    // Title image follow mouse (if applicable)
+    if(window.screen.width > 1000) {
+      animations.followMouse([document.getElementById("title-image"), document.getElementById("title-image-overlay")]);
+    }
+    dynamicBuilder.createClubsAndBoard(document.getElementById("about"    ).getElementsByClassName("sideway-scrollable-container")[0], document.getElementById("about").getElementsByClassName("switch")[0].getElementsByTagName("input")[0]);
+    dynamicBuilder.createRankings(     document.getElementById("rangliste").getElementsByClassName("section-content")[0]);
+    dynamicBuilder.createDates(        document.getElementById("termine"  ).getElementsByClassName("section-content")[0])
+  </script>
 </html>

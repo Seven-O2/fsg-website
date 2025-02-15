@@ -1,121 +1,20 @@
-// Passed elements follow the mouse
-const FollowMouse = (elements) => {
-    let imageXOffset = -0.5;
-    let imageYOffset = -0.5;
+/*
+ * This file contains the site specific builder functions which dynamically loads content from 
+ * the server (fetch)
+ */
 
-    let posXOld = 0;
-    let posYOld = 0;
+//import { imageViewerController } from "./Modules/imageViewer";
+import { flyInFromBottom } from "./animations.js";
+import { fetchCSV, getIconWithText } from "./util.js";
 
-    document.addEventListener("mousemove", e => {
-        const deltaX = (e.clientX - posXOld) / 500
-        const deltaY = (e.clientY - posYOld) / 500
-      
-        posXOld = e.clientX;
-        posYOld = e.clientY;
-        
-        imageXOffset = Math.min(0, Math.max(-1, imageXOffset + deltaX));
-        imageYOffset = Math.min(0, Math.max(-1, imageYOffset + deltaY));
+const months = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
 
-        elements.forEach(element => {
-            element.style.left = imageXOffset + "vw"; 
-            element.style.top  = imageYOffset + "vw";
-        });
-    }, false);
-}
-
-// Passed elements follow scroll in an inverse manner
-const FollowScrollInverse = (elements) => {
-    document.addEventListener("scroll", _ => {
-        const scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
-        elements.forEach(element => {
-            element.style.top = -1 * scrollPosition / 2 + "px";
-        });
-    }, false);
-}
-
-// When top (plus delay) reaches bottom of screen, start reducing margin (thus making a fly in animation)
-const FlyInFromBottom = (elements) => {
-    document.addEventListener("scroll", _ => {
-        Array.from(elements).forEach(element => {
-            const offsetFromBottom = window.innerHeight - element.getBoundingClientRect().top + parseInt(getComputedStyle(element).marginTop); // represents the offset of the sections start to the screens center
-            if(offsetFromBottom > 0) {
-                element.style.marginTop = Math.min(16, Math.max(0, 16 - offsetFromBottom / 20)) + "vh"; 
-            } else {
-                element.style.marginTop = 0; // if the element is out of bounds, set it's margin to 0 (so anchor link jumping works)
-            }
-            
-        });
-    }, false);
-}
-
-// Allows a veritcally scrollable container to be grabbed by a mouse event and moved
-const VerticallyScrollableByDrag = (elements) => {
-    Array.from(elements).forEach(element => { 
-        let canDrag = false;
-        let initialMousePositionX;
-        let initialScrollPosition;
-
-        element.addEventListener('mousedown', (e) => {
-            canDrag               = true;
-            element.style.cursor  = 'grabbing';
-            initialMousePositionX = e.pageX;
-            initialScrollPosition = element.scrollLeft;
-        });
-    
-        element.addEventListener('mouseleave', () => {
-            canDrag              = false;
-            element.style.cursor = 'grab';
-        });
-    
-        element.addEventListener('mouseup', () => {
-            canDrag              = false;
-            element.style.cursor = 'grab';
-        });
-    
-        element.addEventListener('mousemove', (e) => {
-            if (!canDrag) return;
-            e.preventDefault();
-            element.scrollLeft = initialScrollPosition - (e.pageX /* mouse position */ - initialMousePositionX);
-        });
-    });
-}
-
-// Creates an icon with text for the passed icon and text
-const getIconWithText = (iconSrc, iconAlt, text) => {
-    icon = document.createElement("img");
-    icon.src = iconSrc;
-    icon.alt = iconAlt;
-
-    const container = document.createElement("div");
-    container.classList.add("icon-with-text");
-    container.appendChild(icon);
-    container.appendChild(text);
-    return container;
-}
-
-const FetchCSV = (file) => {
-    return fetch(file, { cache: 'no-cache' })
-    .then(response => {
-        if(response.status !== 200) {
-            throw new Error("Couldn't load data")
-        }
-        return response;
-    })
-    .then(response => response.text())
-    .then((data) => data
-        .split(/\r\n|\n/)
-        .splice(1)
-        .filter(e => e !== "")
-        .map(e => e.split(";"))
-    );
-}
-
-const CreateClubsAndBoard = (parent, sw, clubFile, boardFile) => {
+export const createClubsAndBoard = (parent, sw, clubFile, boardFile) => {
     const boardCards = [];
     const clubCards = [];
     const hint = parent.getElementsByClassName("hint")[0];
     hint.innerHTML = "Vorstand →";
-    FetchCSV(boardFile).then(data => {
+    fetchCSV("/data/board.csv").then(data => {
         data.forEach(ev => {
             // [0] => Title, [1] => Name, [2] => Phone, [3] => Mail, [4] => Image
             const card = document.createElement("card");
@@ -154,7 +53,7 @@ const CreateClubsAndBoard = (parent, sw, clubFile, boardFile) => {
                 card.appendChild(getIconWithText("/images/icons/mail.svg", "E-Mail Adresse", mail));
             }
         });
-        return FetchCSV(clubFile); // force loading board first, then club
+        return fetchCSV("/data/clubs.csv"); // force loading board first, then club
     }).then(data => {
         data.forEach(ev => {
             // [0] => Title, [1] => Person, [2] => Mail, [3] => Phone, [4] => Image, [5] => Website
@@ -219,8 +118,8 @@ const CreateClubsAndBoard = (parent, sw, clubFile, boardFile) => {
 }
 
 // Creates the dates on the webpage according to the passed file
-const CreateDates = (parent, file) => {
-    FetchCSV(file).then(data => {
+export const createDates = (parent) => {
+    fetchCSV("/data/dates.csv").then(data => {
         data.forEach(ev => {
             // [0] => Title, [1] => Subtitle, [2] => Date, [3] => Latitude, [4] => Longitude, [5] => Organizer, [6] => Cancelled, [7] => Logo
             const card = document.createElement("div");
@@ -323,7 +222,7 @@ const CreateDates = (parent, file) => {
             }
             
         });
-        FlyInFromBottom([...document.getElementsByClassName("map-card")]);
+        flyInFromBottom([...document.getElementsByClassName("map-card")]);
     }).catch(_ => {
         const title = document.createElement("h2");
         title.innerHTML = "Daten konnten nicht geladen werden.";
@@ -332,10 +231,8 @@ const CreateDates = (parent, file) => {
 }
 
 // Creates the rankings given by the selected PHP Script (executed server side)
-const CreateRankings = (parent, phpScript) => {
-    const months = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
-
-    fetch(phpScript)
+export const createRankings = (parent) => {
+    fetch("/documents/rankings/list_rankings.php")
     .then(response => response.text())
     .then((data) => {
         const json = JSON.parse(data);
