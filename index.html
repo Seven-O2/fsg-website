@@ -54,7 +54,7 @@
           <div class="hint"></div>
           <!-- Vorstand and Clubs filled in by js and csvs -->
         </div>
-        <div class="bylaws-container"><a class="button-like" href="./documents/fsg_statuten.pdf" target="_blank">Statuten</a></div>
+        <div class="bylaws-container"><a class="button-like no-cache" href="./documents/fsg_statuten.pdf" target="_blank">Statuten</a></div>
       </div>
     </section>
     <!--######## DATES ########-->
@@ -71,9 +71,9 @@
       <div class="section-content">
         <p>Neben den fünf offiziellen Klassen Original, Standard, Modified, Promodified und Prototype können in der Schweiz Fahrzeuge unter der Klasse Fun-Cup und Offen fahren. Damit ein Fahrzeug in einer Klasse starten kann, muss es dem Regelment entsprechen. Dies wird bei einer technischen Abnahme vor dem Lauf ermittelt.</p>
         <div class="regulations-container">
-          <a class="button-like" href="./documents/fsg_reglement.pdf" target="_blank">Reglement (FSG)</a>
-          <a class="button-like" href="./documents/euro_reglement.pdf" target="_blank">Reglement (Eurotrial)</a>
-          <a class="button-like" href="./documents/meeting_minutes.pdf" target="_blank">Aktuellste Meeting Minutes</a>
+          <a class="button-like no-cache" href="./documents/fsg_reglement.pdf" target="_blank">Reglement (FSG)</a>
+          <a class="button-like no-cache" href="./documents/euro_reglement.pdf" target="_blank">Reglement (Eurotrial)</a>
+          <a class="button-like no-cache" href="./documents/meeting_minutes.pdf" target="_blank">Aktuellste Meeting Minutes</a>
         </div>
         <div class="sideway-scrollable-container">
           <div class="hint">Weitere Klassen →</div>
@@ -130,6 +130,7 @@
   <script type="module">
     import * as animations from "/js/animations.js"
     import * as dynamicBuilder from "/js/dynamicBuilder.js"
+    import { forceCacheRefresh } from "/js/util.js"
     animations.followScrollInverse([document.getElementById("title-text-container")]);
     animations.flyInFromBottom([...document.getElementsByClassName("section-title")]);
     animations.flyInFromBottom([...document.getElementsByClassName("sideway-scrollable-container")]);
@@ -142,5 +143,7 @@
     dynamicBuilder.createClubsAndBoard(document.getElementById("about"    ).getElementsByClassName("sideway-scrollable-container")[0], document.getElementById("about").getElementsByClassName("switch")[0].getElementsByTagName("input")[0]);
     dynamicBuilder.createRankings(     document.getElementById("rangliste").getElementsByClassName("section-content")[0]);
     dynamicBuilder.createDates(        document.getElementById("termine"  ).getElementsByClassName("section-content")[0])
+
+    forceCacheRefresh([...document.getElementsByClassName("no-cache")])
   </script>
 </html>
