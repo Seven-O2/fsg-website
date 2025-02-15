@@ -227,6 +227,24 @@ section > .section-content > .sideway-scrollable-container {
     margin: 0;
 }
 
+/* Loading icon */
+.loader {
+    height: 20vh;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.loader > img {
+    height: 20vh;
+    animation: rotate 2s infinite linear;
+}
+
+.loader > h3 {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 1rem;
+}
+
 /* Filler */
 .horizontal-spacer {
     width: 100%;

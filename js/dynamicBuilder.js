@@ -5,11 +5,12 @@
 
 //import { imageViewerController } from "./Modules/imageViewer";
 import { flyInFromBottom } from "./animations.js";
-import { fetchCSV, getIconWithText } from "./util.js";
+import { fetchCSV, getIconWithText, loader } from "./util.js";
 
 const months = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
 
-export const createClubsAndBoard = (parent, sw, clubFile, boardFile) => {
+export const createClubsAndBoard = (parent, clubOrBoardSelector) => {
+    const clubAndBoardLoader = loader(parent);
     const boardCards = [];
     const clubCards = [];
     const hint = parent.getElementsByClassName("hint")[0];
@@ -96,15 +97,17 @@ export const createClubsAndBoard = (parent, sw, clubFile, boardFile) => {
                 mail.innerHTML = ev[3];
                 card.appendChild(getIconWithText("/images/icons/mail.svg", "E-Mail Adresse", mail));
             }
-        })
+        });
+        loader.hide();
     }).catch(error => {
         console.log(error);
         const title = document.createElement("h2");
         title.innerHTML = "Daten konnten nicht geladen werden.";
         parent.appendChild(title);
+        loader.hide();
     });
     
-    sw.addEventListener('change', event => {
+    clubOrBoardSelector.addEventListener('change', event => {
         if(event.target.checked) {
             hint.innerHTML = "Clubs →"
             boardCards.forEach(b => b.style.display = "none");
@@ -119,6 +122,7 @@ export const createClubsAndBoard = (parent, sw, clubFile, boardFile) => {
 
 // Creates the dates on the webpage according to the passed file
 export const createDates = (parent) => {
+    const datesLoader = loader(parent);
     fetchCSV("/data/dates.csv").then(data => {
         data.forEach(ev => {
             // [0] => Title, [1] => Subtitle, [2] => Date, [3] => Latitude, [4] => Longitude, [5] => Organizer, [6] => Cancelled, [7] => Logo
@@ -223,15 +227,18 @@ export const createDates = (parent) => {
             
         });
         flyInFromBottom([...document.getElementsByClassName("map-card")]);
+        datesLoader.hide();
     }).catch(_ => {
         const title = document.createElement("h2");
         title.innerHTML = "Daten konnten nicht geladen werden.";
         parent.appendChild(title);
+        datesLoader.hide();
     });
 }
 
 // Creates the rankings given by the selected PHP Script (executed server side)
 export const createRankings = (parent) => {
+    const rankingLoader = loader(parent);
     fetch("/documents/rankings/list_rankings.php")
     .then(response => response.text())
     .then((data) => {
@@ -258,5 +265,11 @@ export const createRankings = (parent) => {
                 rankingContainer.appendChild(link);
             });
         });
+        rankingLoader.hide();
+    }).catch(_ => {
+        const title = document.createElement("h2");
+        title.innerHTML = "Daten konnten nicht geladen werden.";
+        parent.appendChild(title);
+        rankingLoader.hide();
     });
 }
