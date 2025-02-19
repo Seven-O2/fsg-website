@@ -98,13 +98,13 @@ export const createClubsAndBoard = (parent, clubOrBoardSelector) => {
                 card.appendChild(getIconWithText("/images/icons/mail.svg", "E-Mail Adresse", mail));
             }
         });
-        loader.hide();
+        clubAndBoardLoader.hide();
     }).catch(error => {
         console.log(error);
         const title = document.createElement("h2");
         title.innerHTML = "Daten konnten nicht geladen werden.";
         parent.appendChild(title);
-        loader.hide();
+        clubAndBoardLoader.hide();
     });
     
     clubOrBoardSelector.addEventListener('change', event => {
