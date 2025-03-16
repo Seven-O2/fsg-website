@@ -464,6 +464,7 @@ nav {
     padding-bottom: 1rem;
     backdrop-filter: blur(13px);
     background-color: #00000022;
+    transition: 1s;
 }
 
 nav > :first-child { margin-left:  var(--default-spacing); }
