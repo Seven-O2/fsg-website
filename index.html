@@ -23,7 +23,7 @@
         <a href="#termine">Termine</a>
         <a href="#reglement">Reglement</a>
         <a href="#rangliste">Rangliste</a>
-        <a href="https://eurotrial.eu">Eurotrial</a>
+        <a target="_blank" href="https://eurotrial.eu">Eurotrial</a>
       </div>
       <img id="menu-button" src="./images/icons/hamburger.svg" alt="Menu icon" onclick="document.getElementById('menu-button').classList.toggle('enabled'); document.getElementById('menu-links').classList.toggle('enabled');">
     </nav>
@@ -42,19 +42,15 @@
       <h1 class="section-title">Über uns</h1>
       <div class="section-content">
         <p>Die FSG (Föderation Schweizerischer Geländewagenclubs) ist ein Dachverband verschiedener Geländewagenclubs und Vereinigungen, die sich der Ausübung, Erhaltung und Förderung des Geländewagen-Trialsports zum Ziel gesetzt hat. Die FSG ist die einzige nationale Sportorganisation der Schweiz für alle Arten des Offroads.</p>
-        <div class="switch">
-          <p>Vorstand</p>
-          <label>
-            <input type="checkbox">
-            <span></span>
-          </label>
-          <p>Clubs</p>
+        <h2>Vorstand</h2>
+        <div id="vorstand" class="sideway-scrollable-container">
+          <div class="hint">Vorstand →</div>
         </div>
-        <div class="sideway-scrollable-container">
-          <div class="hint"></div>
-          <!-- Vorstand and Clubs filled in by js and csvs -->
+        <p>Falls Du Fragen hast, kannst Du dich gerne telefonisch bei unserer Präsidentin, aber auch per E-Mail an <a href="mailto:info@4x4fsg.ch">info@4x4fsg.ch</a> bei uns melden.</p>
+        <h2>Clubs</h2>
+        <div id="clubs" class="sideway-scrollable-container">
+          <div class="hint">Clubs →</div>
         </div>
-        <div class="bylaws-container"><a class="button-like no-cache" href="./documents/fsg_statuten.pdf" target="_blank">Statuten</a></div>
       </div>
     </section>
     <!--######## DATES ########-->
@@ -73,7 +69,8 @@
         <div class="regulations-container">
           <a class="button-like no-cache" href="./documents/fsg_reglement.pdf" target="_blank">Reglement (FSG)</a>
           <a class="button-like no-cache" href="./documents/euro_reglement.pdf" target="_blank">Reglement (Eurotrial)</a>
-          <a class="button-like no-cache" href="./documents/meeting_minutes.pdf" target="_blank">Aktuellste Meeting Minutes</a>
+          <a class="button-like no-cache" href="./documents/protokoll_eurotrial.pdf" target="_blank">Protokoll Eurotrialsitzung</a>
+          <a class="button-like no-cache" href="./documents/fsg_statuten.pdf" target="_blank">Statuten</a>
         </div>
         <div class="sideway-scrollable-container">
           <div class="hint">Weitere Klassen →</div>
@@ -123,7 +120,7 @@
         <p class="copyright">&copy FSG-Schweiz, alle Rechte vorbehalten</p>
       </div>
       <div>
-        <a href="https://www.hosttime.ch/my/clientarea.php">Anmelden</a>
+        <a target="_blank" href="https://www.hosttime.ch/my/clientarea.php">Anmelden</a>
       </div>
     </footer>
   </body>
@@ -141,7 +138,8 @@
     if(window.screen.width > 1000) {
       animations.followMouse([document.getElementById("title-image"), document.getElementById("title-image-overlay")]);
     }
-    dynamicBuilder.createClubsAndBoard(document.getElementById("about"    ).getElementsByClassName("sideway-scrollable-container")[0], document.getElementById("about").getElementsByClassName("switch")[0].getElementsByTagName("input")[0]);
+    dynamicBuilder.createClubs(        document.getElementById("clubs"    ));
+    dynamicBuilder.createBoard(        document.getElementById("vorstand" ));
     dynamicBuilder.createRankings(     document.getElementById("rangliste").getElementsByClassName("section-content")[0]);
     dynamicBuilder.createDates(        document.getElementById("termine"  ).getElementsByClassName("section-content")[0])
 
