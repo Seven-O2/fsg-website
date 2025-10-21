@@ -93,6 +93,5 @@ export const dynamicNav = (navigation) => {
         diff = delta > 0 ? diff + delta : 0;
         navigation.style.transform = diff > 300 ? "translateY(-10rem)" : "translateY(0)";
         previousPosition = window.pageYOffset
-        console.log(diff)
     })
 }

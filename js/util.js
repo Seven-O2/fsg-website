@@ -86,7 +86,7 @@ export const createMapCard = (parent, title, subtitle, date, latitude, longitude
     card.appendChild(data);
 
     // Logo
-    if(logo !== undefined) {
+    if(logo != "") {
         const logoElement = document.createElement("img");
         logoElement.classList.add("event-logo");
         logoElement.src = logo;

@@ -116,7 +116,7 @@ export const createClubs = (parent) => {
 export const createDates = (parent) => {
     const datesLoader = loader(parent);
     fetchCSV("/data/dates.csv").then(data => {
-        data.forEach(ev => createMapCard(parent, ev[0], ev[1], ev[2], ev[3], ev[4], ev[5], ev[6], ev[7] === "true" ? "/images/icons/eurotrial.png" : undefined));
+        data.forEach(ev => createMapCard(parent, ev[0], ev[1], ev[2], ev[3], ev[4], ev[5], ev[6], ev[7]));
         flyInFromBottom([...document.getElementsByClassName("map-card")]);
         datesLoader.hide();
     }).catch(error => {

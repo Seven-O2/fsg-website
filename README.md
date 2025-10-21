@@ -28,7 +28,7 @@ Simply put the ranking into `/document/rankings/{year}/{MM_DD_PLACE.pdf}`, where
 
 ## Adding events
 Events are saved into the `/data/dates.csv` file. It contains the entries seen in the table below.
-|Title|Subtitle|Date|Latitude|Longitude|Organizer|Cancelled (T/F)|Eurotrial (T/F)|
+|Title|Subtitle|Date|Latitude|Longitude|Organizer|Cancelled (T/F)|Logo (link)|
 |-|-|-|-|-|-|-|-|
 |Reichenau, GR|2. Lauf|27. April 2024|46.82478|09.41534|GWC-Schweiz|false|false|
 
